@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.ValueObjects.Employee
 {
-    public record EmployeeId
+    public sealed record EmployeeId
     {
         public Guid Value { get; }
         public EmployeeId(Guid value)

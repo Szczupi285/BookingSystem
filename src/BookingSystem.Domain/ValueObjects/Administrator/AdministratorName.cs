@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.ValueObjects.Administrator
 {
-    public record AdministratorName : AbstractNamePart
+    public sealed record AdministratorName : AbstractNamePart
     {
         public AdministratorName(string value) : base(value, 3, 35, new AdministratorNameCannotBeNullException(), 
             new InvalidAdministratorNameLengthException(value), new InvalidAdministratorNameException(value))
