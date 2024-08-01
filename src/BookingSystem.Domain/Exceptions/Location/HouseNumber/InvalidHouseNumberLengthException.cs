@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.Exceptions.Location.HouseNumber
 {
-    public class InvalidHouseNumberLength : BookingDomainException
+    public class InvalidHouseNumberLengthException : BookingDomainException
     {
-        public InvalidHouseNumberLength(int maxLen) : base($"House number length cannot be more than {maxLen} characters")
+        public InvalidHouseNumberLengthException(int maxLen) : base($"House number length cannot be more than {maxLen} characters")
         {
         }
     }
