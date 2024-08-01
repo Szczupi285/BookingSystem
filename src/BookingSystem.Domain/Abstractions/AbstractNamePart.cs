@@ -14,7 +14,7 @@ namespace BookingSystem.Domain.Abstractions
         {
             if (value is null)
                 throw nullCase;
-            else if (minLen < 3 && maxLen > 35)
+            else if (value.Length < minLen || value.Length > maxLen)
                 throw InvLenCase;
             else if (!value.All(char.IsLetter))
                 throw NotALetterCase;
