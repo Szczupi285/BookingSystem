@@ -10,7 +10,7 @@ namespace BookingSystem.Domain.Abstractions
     public abstract record AbstractNamePart
     {
         public string Value { get; }
-        public AbstractNamePart(string value, int minLen, int maxLen, BookingDomainException nullCase, BookingDomainException InvLenCase, BookingDomainException NotALetterCase)
+        protected AbstractNamePart(string value, int minLen, int maxLen, BookingDomainException nullCase, BookingDomainException InvLenCase, BookingDomainException NotALetterCase)
         {
             if (value is null)
                 throw nullCase;
