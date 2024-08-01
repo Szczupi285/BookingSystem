@@ -9,7 +9,7 @@ namespace BookingSystem.Domain.Exceptions.Employee.EmployeeName
 {
     public class InvalidEmployeeNameLengthException : BookingDomainException
     {
-        public InvalidEmployeeNameLengthException(string name, int minLen, int maxLen) : base($"Employee name: {name} must be between  {minLen} - {maxLen}  characters inclusivee")
+        public InvalidEmployeeNameLengthException(string name, int minLen, int maxLen) : base($"Employee name: {name} must be between  {minLen} - {maxLen}  characters inclusive")
         {
         }
 
