@@ -10,7 +10,7 @@ namespace BookingSystem.Domain.Exceptions.Employee.EmployeeSurname
 {
     public class InvalidEmployeeSurnameLengthException : BookingDomainException
     {
-        public InvalidEmployeeSurnameLengthException(string surname) : base($"Employee surname: {surname} must be between 3-35 characters inclusive")
+        public InvalidEmployeeSurnameLengthException(string surname, int minLen, int maxLen) : base($"Employee surname: {surname} must be between {minLen} - {maxLen} characters inclusive")
         {
         }
     }

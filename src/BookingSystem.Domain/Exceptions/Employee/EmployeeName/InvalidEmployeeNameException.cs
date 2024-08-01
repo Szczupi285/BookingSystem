@@ -9,7 +9,7 @@ namespace BookingSystem.Domain.Exceptions.Employee.EmployeeName
 {
     public class InvalidEmployeeNameException : BookingDomainException
     {
-        public InvalidEmployeeNameException(string name) : base($"Employee name: {name} cannot contain special characters and digits")
+        public InvalidEmployeeNameException(string name) : base($"Employee name: {name} can contain only letters")
         {
         }
     }

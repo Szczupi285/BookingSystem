@@ -11,7 +11,7 @@ namespace BookingSystem.Domain.ValueObjects.Employee
     public sealed record EmployeeSurname : AbstractNamePart
     {
         public EmployeeSurname(string value) : base(value, 3, 35, new EmployeeSurnameCannotBeNullException(),
-            new InvalidEmployeeSurnameLengthException(value), new InvalidEmployeeSurnameException(value))
+            new InvalidEmployeeSurnameLengthException(value, 3, 35), new InvalidEmployeeSurnameException(value))
         {
         }
 

@@ -10,7 +10,7 @@ namespace BookingSystem.Domain.Exceptions.Administrator.AdministratorName
 {
     public class InvalidAdministratorNameLengthException : BookingDomainException
     {
-        public InvalidAdministratorNameLengthException(string name) : base($"Administrator name: {name} must be between 3-35 characters inclusive")
+        public InvalidAdministratorNameLengthException(string name, int minLen, int maxLen) : base($"Administrator name: {name} must be between {minLen} - {maxLen} characters inclusive")
         {
         }
     }

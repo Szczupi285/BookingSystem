@@ -11,7 +11,7 @@ namespace BookingSystem.Domain.ValueObjects.Administrator
     public sealed record AdministratorSurname : AbstractNamePart
     {
         public AdministratorSurname(string value) : base(value, 3, 35, new AdministratorSurnameCannotBeNullException(),
-            new InvalidAdministratorSurnameLengthException(value), new InvalidAdministratorSurnameException(value))
+            new InvalidAdministratorSurnameLengthException(value, 3, 35), new InvalidAdministratorSurnameException(value))
         {
         }
 

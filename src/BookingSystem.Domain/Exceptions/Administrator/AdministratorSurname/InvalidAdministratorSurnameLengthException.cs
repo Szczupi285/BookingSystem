@@ -9,7 +9,7 @@ namespace BookingSystem.Domain.Exceptions.Administrator.AdministratorSurname
 {
     internal class InvalidAdministratorSurnameLengthException : BookingDomainException
     {
-        public InvalidAdministratorSurnameLengthException(string surname) : base($"Administrator surname: {surname} must be between 3-35 characters inclusive")
+        public InvalidAdministratorSurnameLengthException(string surname, int minLen, int maxLen) : base($"Administrator surname: {surname} must be between {minLen} - {maxLen} characters inclusive")
         {
         }
     }

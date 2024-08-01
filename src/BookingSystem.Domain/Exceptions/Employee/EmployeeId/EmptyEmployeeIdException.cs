@@ -5,9 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookingSystem.Domain.Exceptions
+namespace BookingSystem.Domain.Exceptions.Employee.EmployeeId
 {
     public class EmptyEmployeeIdException : BookingDomainException
     {
+        public EmptyEmployeeIdException() : base("Employee Id cannot be empty")
+        {
+        }
     }
 }

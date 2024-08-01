@@ -1,4 +1,5 @@
 ﻿using BookingSystem.Domain.Exceptions.Administrator;
+using BookingSystem.Domain.Exceptions.Administrator.AdministatorId;
 using BookingSystem.Domain.Exceptions.Employee.EmployeeId;
 using BookingSystem.Domain.ValueObjects.Employee;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.ValueObjects.Administrator
 {
-    public record AdministratorId
+    public sealed record AdministratorId
     {
         public Guid Value { get; }
         public AdministratorId(Guid value)

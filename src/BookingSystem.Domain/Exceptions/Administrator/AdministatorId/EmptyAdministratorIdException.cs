@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookingSystem.Domain.Exceptions.Administrator
+namespace BookingSystem.Domain.Exceptions.Administrator.AdministatorId
 {
     public class EmptyAdministratorIdException : BookingDomainException
     {
