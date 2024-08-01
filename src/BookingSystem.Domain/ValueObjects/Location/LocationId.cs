@@ -1,5 +1,6 @@
 ﻿using BookingSystem.Domain.Exceptions.Employee.EmployeeId;
 using BookingSystem.Domain.Exceptions.Location;
+using BookingSystem.Domain.Exceptions.Location.LocationId;
 using BookingSystem.Domain.ValueObjects.Employee;
 using System;
 using System.Collections.Generic;
