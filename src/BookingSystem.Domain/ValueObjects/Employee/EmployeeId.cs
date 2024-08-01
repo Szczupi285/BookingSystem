@@ -1,4 +1,5 @@
 ﻿using BookingSystem.Domain.Exceptions;
+using BookingSystem.Domain.Exceptions.Employee.EmployeeId;
 using System;
 using System.Collections.Generic;
 using System.Linq;
