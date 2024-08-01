@@ -1,4 +1,6 @@
-﻿using BookingSystem.Domain.Exceptions;
+﻿using BookingSystem.Domain.Abstractions;
+using BookingSystem.Domain.Exceptions;
+using BookingSystem.Domain.Exceptions.Employee.EmployeeName;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,19 +9,13 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.ValueObjects.Employee
 {
-    public record EmployeeName
+    public sealed record EmployeeName : AbstractNamePart
     {
-        public string Value { get; }
-        public EmployeeName(string value)
+        public EmployeeName(string value) : base(value, 3, 35, new EmployeeNameCannotBeNullException(),
+            new InvalidEmployeeNameLengthException(value), new InvalidEmployeeNameException(value))
         {
-            if (value is null)
-                throw new EmployeeNameCannotBeNullException();
-            else if (value.Length < 3 && value.Length > 35)
-                throw new InvalidEmployeeNameLengthException(value);
-            else if (!value.All(char.IsLetter))
-                throw new InvalidEmployeeNameException(value);
-
-            Value = char.ToUpper(value[0]) + value[1..].ToLower();
         }
+
+        public static implicit operator EmployeeName(string name) => new EmployeeName(name);
     }
 }
