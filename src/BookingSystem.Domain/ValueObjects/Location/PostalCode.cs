@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -26,6 +27,10 @@ namespace BookingSystem.Domain.ValueObjects.Location
             
             return Regex.IsMatch(postCode);
         }
+
+        public static implicit operator string(PostalCode postalCode) => postalCode.Value;
+
+        public static implicit operator PostalCode(string postalCode) => new(postalCode);
 
     }
 }

@@ -22,5 +22,9 @@ namespace BookingSystem.Domain.ValueObjects.Location
 
             Value = value;
         }
+
+        public static implicit operator string(StreetName postalCode) => postalCode.Value;
+
+        public static implicit operator StreetName(string postalCode) => new(postalCode);
     }
 }
