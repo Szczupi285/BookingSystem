@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.Entities
 {
-    public class Administrator
+    public class Administrator 
     {
         public AdministratorId Id { get; }
         public AdministratorName Name { get; }
