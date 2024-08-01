@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookingSystem.Domain.Exceptions.Location
+namespace BookingSystem.Domain.Exceptions.Location.CountryName
 {
     public class CountryNameCannotContainNumbersException : BookingDomainException
     {
-        public CountryNameCannotContainNumbersException() : base("Country name cannot contain any numbers")
+        public CountryNameCannotContainNumbersException(string name) : base($"Country name: {name} cannot contain any numbers")
         {
         }
     }

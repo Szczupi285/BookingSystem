@@ -1,4 +1,6 @@
-﻿using BookingSystem.Domain.Exceptions.Location;
+﻿using BookingSystem.Domain.Abstractions;
+using BookingSystem.Domain.Exceptions.Location;
+using BookingSystem.Domain.Exceptions.Location.CountryName;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,18 +9,12 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.ValueObjects.Location
 {
-    public sealed record CountryName
+    public sealed record CountryName : AbstractPlaceName
     {
-        public string Value { get; }
-
-        public CountryName(string value)
+        public CountryName(string value) : base(value, new CountryNameCannotBeNullOrEmptyException(), new CountryNameCannotContainNumbersException(value))
         {
-            if(string.IsNullOrEmpty(value))
-                throw new CountryNameCannotBeNullOrEmptyException();
-            else if(value.Any(char.IsNumber))
-                throw new CountryNameCannotContainNumbersException();
-
-            Value = value;
         }
+
+        public static implicit operator CountryName(string value) => new(value);
     }
 }

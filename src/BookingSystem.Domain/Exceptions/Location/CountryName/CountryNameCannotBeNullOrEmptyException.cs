@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookingSystem.Domain.Exceptions.Location
+namespace BookingSystem.Domain.Exceptions.Location.CountryName
 {
     public class CountryNameCannotBeNullOrEmptyException : BookingDomainException
     {
