@@ -41,6 +41,11 @@ namespace BookingSystem.Domain.Entities
             Desks = new HashSet<Desk>();
         }
 
+        public Desk GetDeskById(DeskId deskId)
+        {
+            var desk = Desks.FirstOrDefault(d => d.Id == deskId);
+            return desk is null ? throw new DeskNotFoundException(deskId) : desk;
+        }
         public void AddDesk(Desk desk) 
         { 
             if(desk is null)
@@ -51,10 +56,9 @@ namespace BookingSystem.Domain.Entities
         }
         public void RemoveDesk(DeskId deskId)
         {
-            var desk = Desks.FirstOrDefault(d => d.Id == deskId);
-            if (desk is null)
-                throw new DeskNotFoundException(deskId);
-            else if(desk.HaveFutureReservations())
+            var desk = GetDeskById(deskId);
+
+            if(desk.HaveFutureReservations())
                 throw new CannotRemoveReservedDeskException();
             
             Desks.Remove(desk);
@@ -63,21 +67,21 @@ namespace BookingSystem.Domain.Entities
         }
         public void MakeDeskUnavailiable(DeskId deskId)
         {
-            var desk = Desks.FirstOrDefault(d => d.Id == deskId) ?? throw new DeskNotFoundException(deskId);
+            var desk = GetDeskById(deskId);
             desk.MakeUnavailiable();
 
             AddEvent(new DeskMadeUnavailable(desk));
         }
         public void MakeDeskAvailiable(DeskId deskId)
         {
-            var desk = Desks.FirstOrDefault(d => d.Id == deskId) ?? throw new DeskNotFoundException(deskId);
+            var desk = GetDeskById(deskId);
             desk.MakeAvailiable();
 
             AddEvent(new DeskMadeAvailable(desk));
         }
         public void ChangeDesk(DeskId deskId, ReservationId reservationId)
         {
-            var desk = Desks.FirstOrDefault(d => d.Id == deskId) ?? throw new DeskNotFoundException(deskId);
+            var desk = GetDeskById(deskId);
             var oldDeskId = desk.Id;
 
             var res = desk.GetReservationById(reservationId);

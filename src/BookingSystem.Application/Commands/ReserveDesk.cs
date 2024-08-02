@@ -8,5 +8,5 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Application.Commands
 {
-    public record ReserveDesk(Guid DeskId, Guid EmployeeId, DateTime startDate, DateTime endDate) : IRequest;
+    public record ReserveDesk(Guid LocationId, Guid DeskId, Guid EmployeeId, DateTime startDate, DateTime endDate) : IRequest;
 }
