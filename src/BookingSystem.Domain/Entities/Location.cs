@@ -19,13 +19,24 @@ namespace BookingSystem.Domain.Entities
         public HashSet<Desk> Desks { get; private set;}
 
         public Location(LocationId id, CityName cityName, StreetName streetName, 
-            HouseNumber houseNumber, FlatNumber? flatNumber, PostalCode postalCode)
+            HouseNumber houseNumber, FlatNumber flatNumber, PostalCode postalCode)
         {
             Id = id;
             CityName = cityName;
             StreetName = streetName;
             HouseNumber = houseNumber;
             FlatNumber = flatNumber;
+            PostalCode = postalCode;
+            Desks = new HashSet<Desk>();
+        }
+        public Location(LocationId id, CityName cityName, StreetName streetName,
+          HouseNumber houseNumber, PostalCode postalCode)
+        {
+            Id = id;
+            CityName = cityName;
+            StreetName = streetName;
+            HouseNumber = houseNumber;
+            FlatNumber = null;
             PostalCode = postalCode;
             Desks = new HashSet<Desk>();
         }

@@ -20,5 +20,9 @@ namespace BookingSystem.Domain.ValueObjects.Location
 
             Value = value;  
         }
+
+        public static implicit operator string(HouseNumber houseNumber) => houseNumber.Value;
+
+        public static implicit operator HouseNumber(string houseNumber) => new(houseNumber);
     }
 }

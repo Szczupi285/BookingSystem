@@ -23,5 +23,9 @@ namespace BookingSystem.Domain.ValueObjects.Location
 
             Value = value;
         }
+
+        public static implicit operator string(FlatNumber flatNumber) => flatNumber.Value;
+
+        public static implicit operator FlatNumber(string flatNumber) => new(flatNumber);
     }
 }
