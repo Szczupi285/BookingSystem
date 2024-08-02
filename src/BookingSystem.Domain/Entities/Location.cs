@@ -94,11 +94,9 @@ namespace BookingSystem.Domain.Entities
         {
             var desk = GetDeskById(deskId);
 
-            bool hasAddedRes = desk.AddReservation(reservation);
-            if(hasAddedRes)
-            {
-                AddEvent(new DeskReserved(this.Id, deskId, reservation.EmployeeId, reservation.Period));
-            }
+            desk.AddReservation(reservation);
+            AddEvent(new DeskReserved(this.Id, deskId, reservation.EmployeeId, reservation.Period));
+            
         }
 
     }

@@ -65,14 +65,13 @@ namespace BookingSystem.Domain.Entities
         private bool DoesOverlap(ReservationPeriod resPeriod1, ReservationPeriod resPeriod2)
             => resPeriod1.StartDate <= resPeriod2.EndDate && resPeriod2.StartDate <= resPeriod1.EndDate;
 
-        public bool AddReservation(Reservation reservation)
+        public void AddReservation(Reservation reservation)
         {
             if (CanReserve(reservation.Period))
             {
                 _reservations.Add(reservation);
-                return true;
             }
-            return false;
+            throw new DeskNotAvailableForReservationException();
         }
       
         internal Reservation GetReservationById(ReservationId Id)
