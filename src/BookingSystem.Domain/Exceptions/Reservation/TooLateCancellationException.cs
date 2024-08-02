@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.Exceptions.Reservation
 {
-    public class TooLateCancellationException : BookingDomainException
+    public class TooLateCancellationException : BookingSystemException
     {
         public TooLateCancellationException() : base("Reservation cannot be removed within 24 hours before the reservation start")
         {

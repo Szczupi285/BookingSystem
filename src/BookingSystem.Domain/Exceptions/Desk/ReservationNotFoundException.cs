@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.Exceptions.Desk
 {
-    public class ReservationNotFoundException : BookingDomainException
+    public class ReservationNotFoundException : BookingSystemException
     {
         public ReservationNotFoundException(Guid guid) : base($"Reservation with Id: {guid} has not been found")
         {

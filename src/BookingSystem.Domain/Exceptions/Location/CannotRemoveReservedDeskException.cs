@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.Exceptions.Location
 {
-    public class CannotRemoveReservedDeskException : BookingDomainException
+    public class CannotRemoveReservedDeskException : BookingSystemException
     {
         public CannotRemoveReservedDeskException() : base("Desk cannot be removed if it has been booked")
         {
