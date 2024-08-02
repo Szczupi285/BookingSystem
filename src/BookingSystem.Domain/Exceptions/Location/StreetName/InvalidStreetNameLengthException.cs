@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.Exceptions.Location.StreetName
 {
-    public class InvalidStreetNameLengthException : BookingDomainException
+    public class InvalidStreetNameLengthException : BookingSystemException
     {
         public InvalidStreetNameLengthException(string streetName, int minLen, int maxLen) : base($"StreetName: {streetName} must be between  {minLen} - {maxLen}  characters inclusive\"")
         {

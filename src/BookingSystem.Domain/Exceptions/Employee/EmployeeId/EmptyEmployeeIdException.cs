@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.Exceptions.Employee.EmployeeId
 {
-    public class EmptyEmployeeIdException : BookingDomainException
+    public class EmptyEmployeeIdException : BookingSystemException
     {
         public EmptyEmployeeIdException() : base("Employee Id cannot be empty")
         {

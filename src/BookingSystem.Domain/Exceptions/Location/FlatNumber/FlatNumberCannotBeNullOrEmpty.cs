@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.Exceptions.Location.FlatNumber
 {
-    public class FlatNumberCannotBeNullOrEmpty : BookingDomainException
+    public class FlatNumberCannotBeNullOrEmpty : BookingSystemException
     {
         public FlatNumberCannotBeNullOrEmpty() : base("Flat number cannot be null or empty")
         {

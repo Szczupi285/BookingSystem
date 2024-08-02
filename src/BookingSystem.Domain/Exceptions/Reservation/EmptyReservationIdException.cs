@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.Exceptions.Reservation
 {
-    public class EmptyReservationIdException : BookingDomainException
+    public class EmptyReservationIdException : BookingSystemException
     {
         public EmptyReservationIdException() : base("Reservation Id cannot be empty")
         {

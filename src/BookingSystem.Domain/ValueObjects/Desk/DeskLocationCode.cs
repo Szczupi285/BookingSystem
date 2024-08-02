@@ -18,5 +18,9 @@ namespace BookingSystem.Domain.ValueObjects.Desk
 
             Value = value;
         }
+
+        public static implicit operator DeskLocationCode(string value) => new(value);
+
+        public static implicit operator string(DeskLocationCode value) => value.Value;
     }
 }

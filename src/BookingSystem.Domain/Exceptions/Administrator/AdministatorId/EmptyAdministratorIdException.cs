@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.Exceptions.Administrator.AdministatorId
 {
-    public class EmptyAdministratorIdException : BookingDomainException
+    public class EmptyAdministratorIdException : BookingSystemException
     {
         public EmptyAdministratorIdException() : base("Administator Id cannot be empty")
         {

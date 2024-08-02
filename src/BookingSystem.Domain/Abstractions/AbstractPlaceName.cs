@@ -11,7 +11,7 @@ namespace BookingSystem.Domain.Abstractions
     {
         public string Value { get; }
 
-        protected AbstractPlaceName(string value, BookingDomainException nullCase, BookingDomainException containNumbCase)
+        protected AbstractPlaceName(string value, BookingSystemException nullCase, BookingSystemException containNumbCase)
         {
             if (string.IsNullOrEmpty(value))
                 throw nullCase;

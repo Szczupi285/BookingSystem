@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.Exceptions.Desk
 {
-    public class EmptyDeskIdException : BookingDomainException
+    public class EmptyDeskIdException : BookingSystemException
     {
         public EmptyDeskIdException() : base("Desk Id cannot be empty")
         {

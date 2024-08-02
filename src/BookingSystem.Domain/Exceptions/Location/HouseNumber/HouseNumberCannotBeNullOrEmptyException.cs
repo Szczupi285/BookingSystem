@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.Exceptions.Location.HouseNumber
 {
-    public class HouseNumberCannotBeNullOrEmptyException : BookingDomainException
+    public class HouseNumberCannotBeNullOrEmptyException : BookingSystemException
     {
         public HouseNumberCannotBeNullOrEmptyException() : base($"House number cannot be null or empty")
         {

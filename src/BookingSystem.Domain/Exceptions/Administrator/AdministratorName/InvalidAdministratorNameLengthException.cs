@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace BookingSystem.Domain.Exceptions.Administrator.AdministratorName
 {
-    public class InvalidAdministratorNameLengthException : BookingDomainException
+    public class InvalidAdministratorNameLengthException : BookingSystemException
     {
         public InvalidAdministratorNameLengthException(string name, int minLen, int maxLen) : base($"Administrator name: {name} must be between {minLen} - {maxLen} characters inclusive")
         {

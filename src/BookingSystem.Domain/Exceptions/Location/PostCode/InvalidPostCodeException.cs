@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.Exceptions.Location.PostCode
 {
-    public class InvalidPostCodeException : BookingDomainException
+    public class InvalidPostCodeException : BookingSystemException
     {
         public InvalidPostCodeException(string postcode) : base($"Provided post code: {postcode} is invalid")
         {

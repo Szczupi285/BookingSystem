@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.Exceptions.Employee.EmployeeName
 {
-    public class InvalidEmployeeNameException : BookingDomainException
+    public class InvalidEmployeeNameException : BookingSystemException
     {
         public InvalidEmployeeNameException(string name) : base($"Employee name: {name} can contain only letters")
         {

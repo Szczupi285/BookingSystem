@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.Exceptions.Administrator.AdministratorSurname
 {
-    internal class InvalidAdministratorSurnameLengthException : BookingDomainException
+    internal class InvalidAdministratorSurnameLengthException : BookingSystemException
     {
         public InvalidAdministratorSurnameLengthException(string surname, int minLen, int maxLen) : base($"Administrator surname: {surname} must be between {minLen} - {maxLen} characters inclusive")
         {

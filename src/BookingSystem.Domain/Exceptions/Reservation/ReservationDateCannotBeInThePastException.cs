@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.Exceptions.Reservation
 {
-    public class ReservationDateCannotBeInThePastException : BookingDomainException
+    public class ReservationDateCannotBeInThePastException : BookingSystemException
     {
         public ReservationDateCannotBeInThePastException() : base("Reservation date cannot be in the past")
         {

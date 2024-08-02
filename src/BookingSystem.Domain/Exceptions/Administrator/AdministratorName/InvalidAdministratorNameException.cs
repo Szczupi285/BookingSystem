@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.Exceptions.Administrator.AdministratorName
 {
-    public class InvalidAdministratorNameException : BookingDomainException
+    public class InvalidAdministratorNameException : BookingSystemException
     {
         public InvalidAdministratorNameException(string name) : base($"Administrator name: {name} can contain only letters")
         {

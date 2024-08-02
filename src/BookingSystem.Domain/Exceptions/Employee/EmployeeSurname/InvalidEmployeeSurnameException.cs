@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace BookingSystem.Domain.Exceptions.Employee.EmployeeSurname
 {
-    public class InvalidEmployeeSurnameException : BookingDomainException
+    public class InvalidEmployeeSurnameException : BookingSystemException
     {
         public InvalidEmployeeSurnameException(string surname) : base($"Employee surname: {surname} can contain only letters")
         {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.Exceptions.Location.StreetName
 {
-    public class InvalidStreetNameException : BookingDomainException
+    public class InvalidStreetNameException : BookingSystemException
     {
         public InvalidStreetNameException(string streetName) : base($"Street name: {streetName} can contain only letters")
         {

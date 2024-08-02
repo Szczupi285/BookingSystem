@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.Exceptions.Location.FlatNumber
 {
-    public class FlatNumberCanOnlyContainNumbersException : BookingDomainException
+    public class FlatNumberCanOnlyContainNumbersException : BookingSystemException
     {
         public FlatNumberCanOnlyContainNumbersException(string flatNumber) : base($"Flat number: {flatNumber} can only contain numbers.")
         {

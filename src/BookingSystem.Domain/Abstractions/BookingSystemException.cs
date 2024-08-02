@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.Abstractions
 {
-    public abstract class BookingDomainException : Exception
+    public abstract class BookingSystemException : Exception
     {
-        protected BookingDomainException(string message) : base(message) { }
+        protected BookingSystemException(string message) : base(message) { }
     }
 }
 

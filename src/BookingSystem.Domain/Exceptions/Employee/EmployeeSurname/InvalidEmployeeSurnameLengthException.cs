@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace BookingSystem.Domain.Exceptions.Employee.EmployeeSurname
 {
-    public class InvalidEmployeeSurnameLengthException : BookingDomainException
+    public class InvalidEmployeeSurnameLengthException : BookingSystemException
     {
         public InvalidEmployeeSurnameLengthException(string surname, int minLen, int maxLen) : base($"Employee surname: {surname} must be between {minLen} - {maxLen} characters inclusive")
         {

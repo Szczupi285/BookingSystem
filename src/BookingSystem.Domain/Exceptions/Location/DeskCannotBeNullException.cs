@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.Exceptions.Location
 {
-    public class DeskCannotBeNullException : BookingDomainException
+    public class DeskCannotBeNullException : BookingSystemException
     {
         public DeskCannotBeNullException() : base("Desk cannot be null")
         {

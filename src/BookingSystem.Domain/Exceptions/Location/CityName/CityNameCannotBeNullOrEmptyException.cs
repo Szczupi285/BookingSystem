@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.Exceptions.Location.CityName
 {
-    public class CityNameCannotBeNullOrEmptyException : BookingDomainException
+    public class CityNameCannotBeNullOrEmptyException : BookingSystemException
     {
         public CityNameCannotBeNullOrEmptyException() : base("City name cannot be null or empty")
         {

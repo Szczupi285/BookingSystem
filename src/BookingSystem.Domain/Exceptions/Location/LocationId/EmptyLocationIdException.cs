@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.Exceptions.Location.LocationId
 {
-    public class EmptyLocationIdException : BookingDomainException
+    public class EmptyLocationIdException : BookingSystemException
     {
         public EmptyLocationIdException() : base("Location Id cannot be empty")
         {

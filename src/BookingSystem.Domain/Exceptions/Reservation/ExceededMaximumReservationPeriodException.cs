@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.Exceptions.Reservation
 {
-    public class ExceededMaximumReservationPeriodException : BookingDomainException
+    public class ExceededMaximumReservationPeriodException : BookingSystemException
     {
         public ExceededMaximumReservationPeriodException() : base($"Reservation period cannot exceed 7 days")
         {

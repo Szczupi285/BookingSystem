@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.Exceptions.Desk
 {
-    public class DeskLocationCodeCannotBeNullOrEmptyException : BookingDomainException
+    public class DeskLocationCodeCannotBeNullOrEmptyException : BookingSystemException
     {
         public DeskLocationCodeCannotBeNullOrEmptyException() : base("Desk location code cannot be null or empty")
         {

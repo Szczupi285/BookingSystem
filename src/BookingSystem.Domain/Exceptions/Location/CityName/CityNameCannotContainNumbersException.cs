@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.Exceptions.Location.CityName
 {
-    public class CityNameCannotContainNumbersException : BookingDomainException
+    public class CityNameCannotContainNumbersException : BookingSystemException
     {
         public CityNameCannotContainNumbersException(string name) : base($"City name: {name} cannot contain any numbers")
         {

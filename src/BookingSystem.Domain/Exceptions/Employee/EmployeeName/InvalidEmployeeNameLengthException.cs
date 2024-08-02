@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.Exceptions.Employee.EmployeeName
 {
-    public class InvalidEmployeeNameLengthException : BookingDomainException
+    public class InvalidEmployeeNameLengthException : BookingSystemException
     {
         public InvalidEmployeeNameLengthException(string name, int minLen, int maxLen) : base($"Employee name: {name} must be between  {minLen} - {maxLen}  characters inclusive")
         {

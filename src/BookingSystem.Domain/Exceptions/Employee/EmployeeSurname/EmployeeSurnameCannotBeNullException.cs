@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.Exceptions.Employee.EmployeeSurname
 {
-    public class EmployeeSurnameCannotBeNullException : BookingDomainException
+    public class EmployeeSurnameCannotBeNullException : BookingSystemException
     {
         public EmployeeSurnameCannotBeNullException() : base("Employee surname cannot be null")
         {
