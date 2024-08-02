@@ -9,7 +9,7 @@ namespace BookingSystem.Domain.Exceptions.Reservation
 {
     public class ReservationCannotEndBeforeItStartsException : BookingDomainException
     {
-        public ReservationCannotEndBeforeItStartsException(DateOnly startDate, DateOnly endDate) : base($"EndDate: {endDate} cannot be before startDate {startDate}")
+        public ReservationCannotEndBeforeItStartsException(DateTime startDate, DateTime endDate) : base($"EndDate: {endDate} cannot be before startDate {startDate}")
         {
         }
     }
