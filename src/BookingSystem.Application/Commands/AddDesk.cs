@@ -8,5 +8,5 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Application.Commands
 {
-    public record AddDesk(Guid locationId, string LocationCode) : IRequest;
+    public record AddDesk(Guid LocationId, string LocationCode) : IRequest;
 }

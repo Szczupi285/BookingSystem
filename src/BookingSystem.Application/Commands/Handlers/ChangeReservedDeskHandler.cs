@@ -11,27 +11,29 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Application.Commands.Handlers
 {
-    public class AddDeskHandler : IRequestHandler<AddDesk>
+    public class ChangeReservedDeskHandler : IRequestHandler<ChangeReservedDesk>
     {
         private readonly ILocationRepository _locationRepository;
         private readonly ILocationReadService _readServiece;
 
-        public AddDeskHandler(ILocationRepository locationRepository, ILocationReadService readServiec)
+        public ChangeReservedDeskHandler(ILocationRepository locationRepository, ILocationReadService readServiec)
         {
             _locationRepository = locationRepository;
             _readServiece = readServiec;
         }
 
-        public async Task Handle(AddDesk request, CancellationToken cancellationToken)
+        public async Task Handle(ChangeReservedDesk request, CancellationToken cancellationToken)
         {
             if (!await _readServiece.ExistsByIdAsync(request.LocationId))
                 throw new LocationDoesNotExistsException(request.LocationId);
 
-           Location loc = await _locationRepository.GetByIdAsync(request.LocationId);
-           loc.AddDesk(new Desk(Guid.NewGuid(), request.LocationCode, request.LocationId));
+            Location loc = await _locationRepository.GetByIdAsync(request.LocationId);
+            loc.ChangeDesk(request.NewDeskId, request.ReservationId);
 
-           await _locationRepository.UpdateAsync(loc);
-           await _locationRepository.SaveChangesAsync(cancellationToken);
+            await _locationRepository.UpdateAsync(loc);
+            await _locationRepository.SaveChangesAsync(cancellationToken)
+
+           
         }
     }
 }

@@ -36,8 +36,6 @@ namespace BookingSystem.Application.Commands.Handlers
                 await _locationRepository.AddAsync(location);
                 await _locationRepository.SaveChangesAsync(cancellationToken);
             }
-            
-            
         }
     }
 }
