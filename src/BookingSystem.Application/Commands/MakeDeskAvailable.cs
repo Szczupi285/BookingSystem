@@ -9,5 +9,5 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Application.Commands
 {
-    public record MakeDeskAvailable(LocationId locationId, DeskId DeskId) : IRequest;
+    public record MakeDeskAvailable(LocationId LocationId, DeskId DeskId) : IRequest;
 }
