@@ -1,4 +1,6 @@
 ﻿using BookingSystem.Domain.Consts;
+using BookingSystem.Domain.DateTimeProvider;
+using BookingSystem.Domain.Exceptions.Reservation;
 using BookingSystem.Domain.ValueObjects.Desk;
 using BookingSystem.Domain.ValueObjects.Location;
 using BookingSystem.Domain.ValueObjects.Reservation;
@@ -48,6 +50,14 @@ namespace BookingSystem.Domain.Entities
             }
             return true;    
         }
+        public bool HaveFutureReservations()
+        {
+            foreach(Reservation reservation in _reservations)
+                if(reservation.Period.StartDate > DateTime.UtcNow)
+                    return true;
+
+            return false;
+        }
         private bool DoesOverlap(ReservationPeriod resPeriod1, ReservationPeriod resPeriod2)
             => resPeriod1.StartDate <= resPeriod2.EndDate && resPeriod2.StartDate <= resPeriod1.EndDate;
 
@@ -56,12 +66,6 @@ namespace BookingSystem.Domain.Entities
             if (CanReserve(reservation.Period))
                 _reservations.Add(reservation);
         }
-
-        // to do after ReservationPeriod refactor
-
-        //public void RemoveReservation(Reservation reservation)
-        //{
-            
-        //}
+      
     }
 }

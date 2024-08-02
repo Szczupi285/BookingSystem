@@ -1,4 +1,5 @@
-﻿using BookingSystem.Domain.ValueObjects.Desk;
+﻿using BookingSystem.Domain.Exceptions.Reservation;
+using BookingSystem.Domain.ValueObjects.Desk;
 using BookingSystem.Domain.ValueObjects.Employee;
 using BookingSystem.Domain.ValueObjects.Reservation;
 using System;
@@ -22,6 +23,14 @@ namespace BookingSystem.Domain.Entities
             Period = period;
             DeskId = deskId;
             EmployeeId = employeeId;
+        }
+
+        public void ChangeReservation(DeskId newDeskId)
+        {
+            if (Period.StartDate <= DateTime.UtcNow.AddHours(24))
+                throw new TooLateCancellationException();
+            else
+                DeskId = newDeskId;
         }
 
     }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookingSystem.Domain.Exceptions.Desk
+namespace BookingSystem.Domain.Exceptions.Location
 {
     public class DeskCannotBeNullException : BookingDomainException
     {

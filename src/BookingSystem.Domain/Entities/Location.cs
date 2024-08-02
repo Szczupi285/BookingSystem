@@ -1,11 +1,8 @@
 ﻿using BookingSystem.Domain.Exceptions.Desk;
+using BookingSystem.Domain.Exceptions.Location;
 using BookingSystem.Domain.ValueObjects.Desk;
 using BookingSystem.Domain.ValueObjects.Location;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace BookingSystem.Domain.Entities
 {
@@ -31,8 +28,32 @@ namespace BookingSystem.Domain.Entities
             Desks = new HashSet<Desk>();
         }
 
-       
-       
+        public void AddDesk(Desk desk) 
+        { 
+            if(desk is null)
+                throw new DeskCannotBeNullException();
+            Desks.Add(desk);
+        }
+        public void RemoveDesk(DeskId deskId)
+        {
+            var desk = Desks.FirstOrDefault(d => d.Id == deskId);
+            if (desk is null)
+                throw new DeskNotFoundException(deskId);
+            else if(desk.HaveFutureReservations())
+                throw new CannotRemoveReservedDeskException();
+            
+            Desks.Remove(desk);
+        }
+        public void MakeDeskUnavailiable(DeskId deskId)
+        {
+            var desk = Desks.FirstOrDefault(d => d.Id == deskId) ?? throw new DeskNotFoundException(deskId);
+            desk.MakeUnavailiable();
+        }
+        public void MakeDeskAvailiable(DeskId deskId)
+        {
+            var desk = Desks.FirstOrDefault(d => d.Id == deskId) ?? throw new DeskNotFoundException(deskId);
+            desk.MakeAvailiable();
+        }
 
     }
 }
