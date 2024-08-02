@@ -12,7 +12,7 @@ namespace BookingSystem.Domain.ValueObjects.Reservation
     {
         private IDateTimeProvider _dateTimeProvider;
         public DateOnly StartDate { get; }
-        public DateTime EndDate { get; }
+        public DateOnly EndDate { get; }
 
         public ReservationPeriod(DateOnly startDate, DateOnly endDate,  IDateTimeProvider dateTimeProvider)
         {
@@ -26,6 +26,9 @@ namespace BookingSystem.Domain.ValueObjects.Reservation
             else if ((endDate.DayNumber - startDate.DayNumber) >= 7)
                 throw new ExceededMaximumReservationPeriodException();
 
+
+            StartDate = startDate;
+            EndDate = endDate;
         }
     }
 }
