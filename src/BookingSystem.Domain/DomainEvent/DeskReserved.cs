@@ -1,6 +1,7 @@
 ﻿using BookingSystem.Domain.Entities;
 using BookingSystem.Domain.ValueObjects.Desk;
 using BookingSystem.Domain.ValueObjects.Employee;
+using BookingSystem.Domain.ValueObjects.Location;
 using BookingSystem.Domain.ValueObjects.Reservation;
 using System;
 using System.Collections.Generic;
@@ -11,5 +12,5 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.DomainEvent
 {
-    public record DeskReserved(DeskId DeskId, EmployeeId EmployeeId, ReservationPeriod ReservationPeriod) : IDomainEvent;
+    public record DeskReserved(LocationId LocationId ,DeskId DeskId, EmployeeId EmployeeId, ReservationPeriod ReservationPeriod) : IDomainEvent;
 }

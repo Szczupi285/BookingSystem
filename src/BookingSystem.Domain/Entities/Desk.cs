@@ -16,8 +16,9 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.Entities
 {
-    public class Desk : AggregateRoot<DeskId>
+    public class Desk
     {
+        public DeskId Id { get; }
         public DeskLocationCode LocationCode { get; private set; }
         public LocationId LocationId { get; private set; }
         public AvailabilityEnum Availability { get; private set; }
@@ -42,7 +43,7 @@ namespace BookingSystem.Domain.Entities
         {
             Availability = AvailabilityEnum.Available;
         }
-        public bool CanReserve(ReservationPeriod reservationPeriod)
+        private bool CanReserve(ReservationPeriod reservationPeriod)
         {
             if(Availability == AvailabilityEnum.Unavailable) 
                 return false;
@@ -64,12 +65,14 @@ namespace BookingSystem.Domain.Entities
         private bool DoesOverlap(ReservationPeriod resPeriod1, ReservationPeriod resPeriod2)
             => resPeriod1.StartDate <= resPeriod2.EndDate && resPeriod2.StartDate <= resPeriod1.EndDate;
 
-        public void AddReservation(Reservation reservation)
+        public bool AddReservation(Reservation reservation)
         {
             if (CanReserve(reservation.Period))
+            {
                 _reservations.Add(reservation);
-
-            AddEvent(new DeskReserved(this.Id, reservation.EmployeeId, reservation.Period));
+                return true;
+            }
+            return false;
         }
       
         internal Reservation GetReservationById(ReservationId Id)

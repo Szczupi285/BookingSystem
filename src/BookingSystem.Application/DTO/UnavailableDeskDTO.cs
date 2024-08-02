@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Application.DTO
 {
-    public record DeskDTO(Guid Id, string LocationCode, Guid LocationId, bool Availability);
+    public record UnavailableDeskDTO(Guid Id, string LocationCode, Guid LocationId);
 }
