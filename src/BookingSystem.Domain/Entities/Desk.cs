@@ -1,20 +1,23 @@
-﻿using BookingSystem.Domain.Consts;
+﻿using BookingSystem.Domain.Abstractions;
+using BookingSystem.Domain.Consts;
 using BookingSystem.Domain.DateTimeProvider;
+using BookingSystem.Domain.DomainEvent;
+using BookingSystem.Domain.Exceptions.Desk;
 using BookingSystem.Domain.Exceptions.Reservation;
 using BookingSystem.Domain.ValueObjects.Desk;
 using BookingSystem.Domain.ValueObjects.Location;
 using BookingSystem.Domain.ValueObjects.Reservation;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BookingSystem.Domain.Entities
 {
-    public class Desk
+    public class Desk : AggregateRoot<DeskId>
     {
-        public DeskId Id { get; }
         public DeskLocationCode LocationCode { get; private set; }
         public LocationId LocationId { get; private set; }
         public AvailabilityEnum Availability { get; private set; }
@@ -30,12 +33,12 @@ namespace BookingSystem.Domain.Entities
             _reservations = new List<Reservation>();
         }
 
-        public void MakeUnavailiable()
+        internal void MakeUnavailiable()
         {
             Availability = AvailabilityEnum.Unavailable;
         }
 
-        public void MakeAvailiable()
+        internal void MakeAvailiable()
         {
             Availability = AvailabilityEnum.Available;
         }
@@ -65,7 +68,14 @@ namespace BookingSystem.Domain.Entities
         {
             if (CanReserve(reservation.Period))
                 _reservations.Add(reservation);
+
+            AddEvent(new DeskReserved(this.Id, reservation.EmployeeId, reservation.Period));
         }
       
+        internal Reservation GetReservationById(ReservationId Id)
+        {
+            var res = _reservations.FirstOrDefault(reservation => reservation.Id == Id) ?? throw new ReservationNotFoundException(Id);
+            return res;
+        }
     }
 }

@@ -25,7 +25,13 @@ namespace BookingSystem.Domain.Entities
             EmployeeId = employeeId;
         }
 
-        public void ChangeReservation(DeskId newDeskId)
+        public bool CanChangeReservation()
+        {
+            if (Period.StartDate <= DateTime.UtcNow.AddHours(24))
+                return false;
+            return true;
+        }
+        internal void ChangeReservation(DeskId newDeskId)
         {
             if (Period.StartDate <= DateTime.UtcNow.AddHours(24))
                 throw new TooLateCancellationException();
