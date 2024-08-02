@@ -1,4 +1,5 @@
-﻿using BookingSystem.Domain.ValueObjects.Desk;
+﻿using BookingSystem.Domain.Exceptions.Desk;
+using BookingSystem.Domain.ValueObjects.Desk;
 using BookingSystem.Domain.ValueObjects.Location;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace BookingSystem.Domain.Entities
         public HouseNumber HouseNumber { get; private set; }
         public FlatNumber? FlatNumber { get; private set; }
         public PostalCode PostalCode { get; private set; }
-        public ICollection<Desk> Desks { get; private set;}
+        public HashSet<Desk> Desks { get; private set;}
 
         public Location(LocationId id, CityName cityName, StreetName streetName, 
             HouseNumber houseNumber, FlatNumber? flatNumber, PostalCode postalCode)
@@ -29,6 +30,9 @@ namespace BookingSystem.Domain.Entities
             PostalCode = postalCode;
             Desks = new HashSet<Desk>();
         }
+
+       
+       
 
     }
 }

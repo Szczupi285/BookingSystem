@@ -23,5 +23,6 @@ namespace BookingSystem.Domain.Entities
             DeskId = deskId;
             EmployeeId = employeeId;
         }
+
     }
 }
