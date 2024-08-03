@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingSystem.Application",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingSystem.Domain", "..\BookingSystem.Domain\BookingSystem.Domain.csproj", "{CF2CC2AC-2BEE-4CE4-B7B4-5C88260DB790}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingSystemDomainUnitTests", "..\BookingSystemDomainUnitTests\BookingSystemDomainUnitTests.csproj", "{6BEAD763-49D1-4B67-9B55-23E8D955DC5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingSystemDomainUnitTests", "..\BookingSystemDomainUnitTests\BookingSystemDomainUnitTests.csproj", "{6BEAD763-49D1-4B67-9B55-23E8D955DC5F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
