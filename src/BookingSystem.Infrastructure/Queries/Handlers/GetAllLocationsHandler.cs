@@ -21,10 +21,7 @@ namespace BookingSystem.Infrastructure.Queries.Handlers
             => _dbContext = context;
 
         public async Task<IEnumerable<LocationDTO>> Handle(GetAllLocations request, CancellationToken cancellationToken)
-        {
-            var count = await _dbContext.Locations.CountAsync();
-
-            var locations = await _dbContext.Locations
+            => await _dbContext.Locations
                 .Skip((request.PageNumber - 1) * request.PageSize)
                 .Take(request.PageSize)
                 .Select(l => new LocationDTO
@@ -36,10 +33,6 @@ namespace BookingSystem.Infrastructure.Queries.Handlers
                     l.FlatNumber,
                     l.PostalCode
                 )).ToListAsync(cancellationToken);
-
-            return locations;
-
-        }
            
     }
 }
