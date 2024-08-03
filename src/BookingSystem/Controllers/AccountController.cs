@@ -1,5 +1,6 @@
 ﻿using BookingSystem.Infrastructure.EF.DTO;
 using BookingSystem.Infrastructure.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -42,7 +43,8 @@ namespace BookingSystem.Api.Controllers
             var user = await _authenticationService.AuthenticateAsync(loginDTO.Email, loginDTO.Password);
             if (user is not null)
             {
-                var token = _tokenService.GenerateToken(user);
+                var roles = await _userManager.GetRolesAsync(user);
+                var token = _tokenService.GenerateToken(user, roles);
                 return Ok(token);
             }
             return NotFound("User not found");
@@ -61,8 +63,6 @@ namespace BookingSystem.Api.Controllers
             // Proper soultion is requiring email confirmation and returning 200 status
             return Conflict(result.ErrorCode);
         }
-
-
 
     }
 }

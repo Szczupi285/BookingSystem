@@ -9,6 +9,6 @@ namespace BookingSystem.Infrastructure.Services
 {
     public interface ITokenService
     {
-        string GenerateToken(IdentityUser user);
+        string GenerateToken(IdentityUser user, ICollection<string> roles);
     }
 }
