@@ -9,5 +9,5 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Application.Queries
 {
-    public record GetAvailiableDesksQuery(LocationId Guid, int PageNumber, int PageSize) : IRequest<IEnumerable<AvailableDeskDTO>>;
+    public record GetAvailiableDesks(LocationId Guid, DateTime startDate, DateTime endDate, int PageNumber, int PageSize) : IRequest<IEnumerable<AvailableDeskDTO>>;
 }

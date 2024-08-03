@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Application.DTO
 {
-    public record EmployeeDTO(Guid Id, string Name, string Surname);
+    public record DetailedDeskDTO(Guid Id, Guid LocationId, string LocationCode, bool Availability, IEnumerable<DetailedReservationDTO> Reservation);
 }

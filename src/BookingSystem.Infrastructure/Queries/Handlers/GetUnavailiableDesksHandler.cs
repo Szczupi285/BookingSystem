@@ -19,9 +19,11 @@ namespace BookingSystem.Infrastructure.Queries.Handlers
 
         public async Task<IEnumerable<UnavailableDeskDTO>> Handle(GetUnavailiableDesks request, CancellationToken cancellationToken)
                 => await _dbContext.Desks
+                .Where(d => d.Availability == false 
+                || d.Reservations.Any(r => d.Reservations.Any(r =>
+                    request.StartDate <= r.EndDate && r.StartDate < request.EndDate)))
                 .Skip((request.PageNumber - 1) * request.PageSize)
                 .Take(request.PageSize)
-                .Where(a => a.Availability == false)
                 .Select(d => new UnavailableDeskDTO
                 (
                     d.Id,

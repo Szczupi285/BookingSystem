@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Application.DTO
 {
-    public record ReservationDTO(Guid Id, Guid DeskId, DateTime StartDate, DateTime EndDate);
+    public record ReservationDTO(Guid Id, Guid UserId, DateTime StartDate, DateTime EndDate);
 }

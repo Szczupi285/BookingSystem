@@ -43,7 +43,7 @@ namespace BookingSystem.Domain.Entities
         {
             Availability = AvailabilityEnum.Available;
         }
-        private bool CanReserve(ReservationPeriod reservationPeriod)
+        public bool CanReserve(ReservationPeriod reservationPeriod)
         {
             if(Availability == AvailabilityEnum.Unavailable) 
                 return false;

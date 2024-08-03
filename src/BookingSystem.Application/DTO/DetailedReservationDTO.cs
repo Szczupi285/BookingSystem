@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Application.DTO
 {
-    public record AdministratorDTO(Guid Id, string Name, string Surname);
+    public record DetailedReservationDTO(Guid Id, string UserId, string Username, string Email, DateTime StartDate, DateTime EndDate);
 }
