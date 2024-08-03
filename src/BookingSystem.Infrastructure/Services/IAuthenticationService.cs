@@ -1,4 +1,5 @@
 ﻿using BookingSystem.Infrastructure.EF.Models;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace BookingSystem.Infrastructure.Services
 {
     public interface IAuthenticationService
     {
-        Task<AuthenticationResult> AuthenticateAsync(string email, string password);
+        Task<IdentityUser?> AuthenticateAsync(string email, string password);
     }
 }

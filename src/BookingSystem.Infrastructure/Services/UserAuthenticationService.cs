@@ -21,18 +21,17 @@ namespace BookingSystem.Infrastructure.Services
             _signInManager = signInManager;
         }
 
-        public async Task<AuthenticationResult> AuthenticateAsync(string email, string password)
+        public async Task<IdentityUser?> AuthenticateAsync(string email, string password)
         {
             var user = await _userManager.FindByEmailAsync(email);
-            if(user is null)
-                return new AuthenticationResult(Succeeded: false, ErrorMessage: "Invalid Creditentials");
-            
-            var result = await _signInManager.CheckPasswordSignInAsync(user, password, false);
-            if(result.Succeeded)
+            if(user is not null)
             {
-                return new AuthenticationResult(true, string.Empty);
+                var result = await _signInManager.CheckPasswordSignInAsync(user, password, false);
+
+                if (result.Succeeded)
+                    return user;
             }
-            return new AuthenticationResult(false, "Invalid Creditentials");
+            return null;
         }
     }
 }
