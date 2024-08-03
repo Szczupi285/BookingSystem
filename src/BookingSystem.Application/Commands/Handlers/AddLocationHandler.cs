@@ -21,7 +21,7 @@ namespace BookingSystem.Application.Commands.Handlers
 
         public async Task Handle(AddLocation request, CancellationToken cancellationToken)
         {
-
+           
             if(request.FlatNumber is not null)
             {
                 Location location = new(Guid.NewGuid(), request.CityName, request.StreetName,
