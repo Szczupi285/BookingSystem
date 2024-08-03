@@ -14,7 +14,11 @@ namespace BookingSystem.Infrastructure.EF.DTO
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, MinimumLength = 6)]
+        [StringLength(64, MinimumLength = 6)]
         public string Password { get; set; }
-}
+
+        [Required]
+        [StringLength(32,  MinimumLength = 6)]
+        public string Username { get; set; }
+    }
 }
