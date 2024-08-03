@@ -25,10 +25,10 @@ namespace BookingSystem.Infrastructure.Queries.Handlers
         // checks if availiability is set to true and not one reservation overlaps
         public async Task<IEnumerable<AvailableDeskDTO>> Handle(GetAvailiableDesks request, CancellationToken cancellationToken)
              => await _dbContext.Desks
-                .Where(a => a.Availability == true)
-                .Where(d => !d.Reservations.Any(r =>
+                .Where(d => d.Location.Id == request.LocationId &&
+                    d.Availability == true &&
+                !d.Reservations.Any(r =>
                     request.StartDate <= r.EndDate && r.StartDate < request.EndDate))
-                .Skip((request.PageNumber - 1) * request.PageSize)
                 .Take(request.PageSize)
                 .Select(d => new AvailableDeskDTO
                 (
