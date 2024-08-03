@@ -8,5 +8,5 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Application.Queries
 {
-    public record GetReservationsInLocationForAdmin : IRequest<IEnumerable<AdminReservationDetailsDTO>>;
+    public record GetReservationsInLocationForAdmin(Guid LocationId, int PageNumber, int PageSize) : IRequest<IEnumerable<AdminReservationDetailsDTO>>;
 }
