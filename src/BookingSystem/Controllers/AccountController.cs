@@ -42,8 +42,8 @@ namespace BookingSystem.Api.Controllers
             var user = await _authenticationService.AuthenticateAsync(loginDTO.Email, loginDTO.Password);
             if (user is not null)
             {
-                _tokenService.GenerateToken(user);
-                return Ok(user);
+                var token = _tokenService.GenerateToken(user);
+                return Ok(token);
             }
             return NotFound("User not found");
         }
