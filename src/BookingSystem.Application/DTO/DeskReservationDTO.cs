@@ -6,5 +6,6 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Application.DTO
 {
-    public record ReservationDTO(Guid Id, DateTime StartDate, DateTime EndDate);
+    
+    public record DeskReservationDTO(Guid Id, string LocationCode, Guid LocationId, bool Availability, IEnumerable<ReservationDTO> ReservationDTOs);
 }

@@ -11,32 +11,27 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Infrastructure.Queries.Handlers
 {
-    internal sealed class GetDeskInLocationForAdminHandler : IRequestHandler<GetDeskInLocationForAdmin, DetailedDeskDTO>
+    public class GetDeskInLocationForEmployeeHandler : IRequestHandler<GetDeskInLocationForEmployee, DeskReservationDTO>
     {
         private readonly AppDbContext _dbContext;
-        public GetDeskInLocationForAdminHandler(AppDbContext context)
+        public GetDeskInLocationForEmployeeHandler(AppDbContext context)
             => _dbContext = context;
 
-        public async Task<DetailedDeskDTO> Handle(GetDeskInLocationForAdmin request, CancellationToken cancellationToken)
-            => await _dbContext.Desks
+        public async Task<DeskReservationDTO> Handle(GetDeskInLocationForEmployee request, CancellationToken cancellationToken)
+         => await _dbContext.Desks
             .Where(d => d.Location.Id == request.LocationId)
-            .Select(d => new DetailedDeskDTO
+            .Select(d => new DeskReservationDTO
             (
                 d.Id,
-                d.Location.Id,
                 d.DeskLocationCode,
+                d.Location.Id,
                 d.Availability,
-                d.Reservations.Select(r => new DetailedReservationDTO
+                d.Reservations.Select(r => new ReservationDTO
                 (
                     r.Id,
-                    r.User.Id,
-                    r.User.UserName,
-                    r.User.Email,
                     r.StartDate,
                     r.EndDate
                 ))
             )).FirstAsync(cancellationToken);
-           
-            
     }
 }
