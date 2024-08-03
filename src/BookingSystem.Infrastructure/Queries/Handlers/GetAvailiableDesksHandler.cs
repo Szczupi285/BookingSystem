@@ -15,14 +15,14 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Infrastructure.Queries.Handlers
 {
-    internal sealed class GetAvailiableDesksQueryHandler : IRequestHandler<GetAvailiableDesksQuery, IEnumerable<AvailableDeskDTO>>
+    internal sealed class GetAvailiableDesksHandler : IRequestHandler<GetAvailiableDesks, IEnumerable<AvailableDeskDTO>>
     {
         private readonly AppDbContext _dbContext;
-        public GetAvailiableDesksQueryHandler(AppDbContext context)
+        public GetAvailiableDesksHandler(AppDbContext context)
             => _dbContext = context;
 
 
-        public async Task<IEnumerable<AvailableDeskDTO>> Handle(GetAvailiableDesksQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<AvailableDeskDTO>> Handle(GetAvailiableDesks request, CancellationToken cancellationToken)
              => await _dbContext.Desks
                 .Skip((request.PageNumber - 1) * request.PageSize)
                 .Take(request.PageSize)

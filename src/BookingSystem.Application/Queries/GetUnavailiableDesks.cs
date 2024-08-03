@@ -8,5 +8,5 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Application.Queries
 {
-    public record GetUnavailiableDesksQuery(Guid LocationId) : IRequest<IEnumerable<UnavailableDeskDTO>>;
+    public record GetUnavailiableDesks(Guid LocationId, int PageNumber, int PageSize) : IRequest<IEnumerable<UnavailableDeskDTO>>;
 }
