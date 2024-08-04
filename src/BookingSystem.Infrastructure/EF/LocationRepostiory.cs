@@ -80,7 +80,15 @@ namespace BookingSystem.Infrastructure.EF
             { 
                 if(!unchLoc.Desks.Any(d => d.Id == dsk.Id))
                     _appDbContext.Attach(dsk).State = EntityState.Added;
+               
             }
+            var desksToDel = unchLoc.Desks.Where(d => !locationModel.Desks.Any(ld => ld.Id == d.Id)).ToList();
+            foreach (var dsk in desksToDel)
+            {
+                _appDbContext.Entry(dsk).State = EntityState.Deleted;
+                locationModel.Desks.Remove(dsk);
+            }
+
             _appDbContext.Locations.Update(locationModel);
             await _appDbContext.SaveChangesAsync();
         }

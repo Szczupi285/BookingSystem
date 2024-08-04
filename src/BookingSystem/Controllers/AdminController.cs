@@ -46,7 +46,14 @@ namespace BookingSystem.Api.Controllers
             await _mediator.Send(command);
             return Ok("Desk added successfully");
         }
-       
+        [HttpPost("RemoveDesk")]
+        public async Task<IActionResult> RevmoeDesk([FromBody] RemoveDesk request)
+        {
+            var command = new RemoveDesk(request.LocationId, request.DeskId);
+            await _mediator.Send(command);
+            return Ok("Desk removed successfully");
+        }
+
 
     }
 }
