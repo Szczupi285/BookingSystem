@@ -10,8 +10,7 @@ namespace BookingSystem.Domain.Repositories
 {
     public interface ILocationRepository
     {
-        Task<Location> GetByIdAsync(LocationId Id);
-        Task<IEnumerable<Location>> GetAllAsync();
+        Task<Location?> GetByIdAsync(LocationId Id);
         Task AddAsync(Location location);
         Task UpdateAsync(Location location);
         Task RemoveAsync(Location location);
