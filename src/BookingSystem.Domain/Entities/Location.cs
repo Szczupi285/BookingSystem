@@ -16,7 +16,7 @@ namespace BookingSystem.Domain.Entities
         public HouseNumber HouseNumber { get; private set; }
         public FlatNumber? FlatNumber { get; private set; }
         public PostalCode PostalCode { get; private set; }
-        public HashSet<Desk> Desks { get; private set;}
+        public List<Desk> Desks { get; private set;} = new List<Desk>();
 
         public Location(LocationId id, CityName cityName, StreetName streetName, 
             HouseNumber houseNumber, FlatNumber flatNumber, PostalCode postalCode)
@@ -27,7 +27,6 @@ namespace BookingSystem.Domain.Entities
             HouseNumber = houseNumber;
             FlatNumber = flatNumber;
             PostalCode = postalCode;
-            Desks = new HashSet<Desk>();
         }
         public Location(LocationId id, CityName cityName, StreetName streetName,
           HouseNumber houseNumber, PostalCode postalCode)
@@ -38,7 +37,6 @@ namespace BookingSystem.Domain.Entities
             HouseNumber = houseNumber;
             FlatNumber = null;
             PostalCode = postalCode;
-            Desks = new HashSet<Desk>();
         }
 
         public Desk GetDeskById(DeskId deskId)

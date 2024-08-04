@@ -15,6 +15,7 @@ namespace BookingSystem.Infrastructure.EF.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public DeskModel Desk { get; set; }
+        public Guid DeskId { get; set; }
         public string UserId { get; set; }
         public IdentityUser User { get; set; }
     }

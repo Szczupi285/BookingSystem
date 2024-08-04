@@ -30,7 +30,7 @@ namespace BookingSystem.Application.Commands.Handlers
 
             loc.MakeDeskUnavailiable(request.DeskId);
 
-            await _locationRepository.UpdateAsync(loc);
+            //await _locationRepository.UpdateAsync(loc);
             await _locationRepository.SaveChangesAsync(cancellationToken);
 
         }

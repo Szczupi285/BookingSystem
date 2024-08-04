@@ -4,6 +4,7 @@ using BookingSystem.Infrastructure.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240804063142_AddedEntitiesIds")]
+    partial class AddedEntitiesIds
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,6 +37,9 @@ namespace BookingSystem.Infrastructure.Migrations
                     b.Property<string>("DeskLocationCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("LocaationId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("LocationId")
                         .HasColumnType("uniqueidentifier");
@@ -133,13 +139,13 @@ namespace BookingSystem.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c5451021-88b8-4527-bd0f-ad8a84c96e65",
+                            Id = "f645ef29-07d3-43c1-8095-7c5977c59d57",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "709be053-6ca6-470a-8e3a-a789bb439191",
+                            Id = "9b44701d-135b-4d76-a9df-3dbb65f3d454",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -237,33 +243,33 @@ namespace BookingSystem.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8e78fa9f-d392-412d-b797-7b2cca2f81f0",
+                            Id = "e5239d8e-7f51-4459-ac55-fd819a95e1e0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9130f5f5-5970-4a63-95d8-3d37e156cf54",
+                            ConcurrencyStamp = "c75f8cf6-287e-487f-98db-0509491e4ca9",
                             Email = "admin@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@EXAMPLE.COM",
                             NormalizedUserName = "ADMINISTRATOR",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFnszaFy4POVcBL4PuKuI+iEkqug21A6mGfqH6mYZzziFDukTTkDmEM9FEfVFULkzw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBXT2M2VyFL1VMm/c1mK0j3liWiAH7bT089AV2qV3U10msKsl/CVXlHIEvuTcMe+gg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "66dbe065-e66d-4336-9a25-5a5a9e52925c",
+                            SecurityStamp = "757a4695-2b8a-4b8c-b11b-e0173c30fce8",
                             TwoFactorEnabled = false,
                             UserName = "Administrator"
                         },
                         new
                         {
-                            Id = "d8790fb2-ca1a-42b2-9c3d-d807f39cd6ac",
+                            Id = "ecf97486-511b-4190-a556-6a1f86ec11da",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8d7159bd-a5c1-458a-acd0-bedfdd3dfbe0",
+                            ConcurrencyStamp = "1ef68026-6d8e-4c07-a0cc-f76fbe69cbb8",
                             Email = "employee@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "EMPLOYEE@EXAMPLE.COM",
                             NormalizedUserName = "EMPLOYEE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBAeaAPzm7/Qz0x0RG0p3qms3o5NkupHlyNcUDHoofPSgCNOkzIHXIN3yqxoPzFIGg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBT/WBjlaKu+S0e6S9vFERRlYIKxdqsCrrOnucSDLYlGBjUreDpL36kzOoZIzK1Q6Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a9abc612-8305-4a0c-8d6f-a26b2430d89a",
+                            SecurityStamp = "9d5efc9a-a417-4556-866f-714679396c50",
                             TwoFactorEnabled = false,
                             UserName = "Employee"
                         });
@@ -333,13 +339,13 @@ namespace BookingSystem.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "8e78fa9f-d392-412d-b797-7b2cca2f81f0",
-                            RoleId = "c5451021-88b8-4527-bd0f-ad8a84c96e65"
+                            UserId = "e5239d8e-7f51-4459-ac55-fd819a95e1e0",
+                            RoleId = "f645ef29-07d3-43c1-8095-7c5977c59d57"
                         },
                         new
                         {
-                            UserId = "d8790fb2-ca1a-42b2-9c3d-d807f39cd6ac",
-                            RoleId = "709be053-6ca6-470a-8e3a-a789bb439191"
+                            UserId = "ecf97486-511b-4190-a556-6a1f86ec11da",
+                            RoleId = "9b44701d-135b-4d76-a9df-3dbb65f3d454"
                         });
                 });
 

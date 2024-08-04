@@ -39,7 +39,7 @@ namespace BookingSystem.Application.Commands.Handlers
             Reservation res = new Reservation(Guid.NewGuid(), resPe, request.DeskId, request.EmployeeId);
             desk.AddReservation(res);
 
-            await _locationRepository.UpdateAsync(loc);
+            //await _locationRepository.UpdateAsync(loc);
             await _locationRepository.SaveChangesAsync(cancellationToken);
         }
     }

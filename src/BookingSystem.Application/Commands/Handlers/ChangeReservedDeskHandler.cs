@@ -30,7 +30,7 @@ namespace BookingSystem.Application.Commands.Handlers
             Location loc = await _locationRepository.GetByIdAsync(request.LocationId);
             loc.ChangeDesk(request.NewDeskId, request.ReservationId);
 
-            await _locationRepository.UpdateAsync(loc);
+            _locationRepository.UpdateAsync(loc);
             await _locationRepository.SaveChangesAsync(cancellationToken);
            
         }

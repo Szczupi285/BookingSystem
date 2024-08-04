@@ -57,34 +57,35 @@ namespace BookingSystem.Infrastructure.Mappers
                 HouseNumber = location.HouseNumber,
                 FlatNumber = location.FlatNumber,
                 PostalCode = location.PostalCode,
-                Desks = new List<DeskModel>()
-            };
-            foreach(var desk in location.Desks)
-            {
-                var deskModel = new DeskModel
+                Desks = location.Desks.Select(desk => new DeskModel
                 {
                     Id = desk.Id.Value,
                     DeskLocationCode = desk.LocationCode,
-                    Availability = desk.Availability == AvailabilityEnum.Available ? true : false,
-                    Location = loc,
-                    Reservations = new List<ReservationModel>()
-                };
-                foreach (var res in desk.GetReservations())
-                {
-                    var resModel = new ReservationModel
+                    Availability = desk.Availability == AvailabilityEnum.Available,
+                    LocationId = location.Id, 
+                    Reservations = desk.GetReservations().Select(res => new ReservationModel
                     {
                         Id = res.Id.Value,
                         StartDate = res.Period.StartDate,
                         EndDate = res.Period.EndDate,
-                        Desk = deskModel,
-                        UserId = res.EmployeeId.Value.ToString()
-                    };
-                    deskModel.Reservations.Add(resModel);
-                }
-                loc.Desks.Add(deskModel);
-            }
+                        UserId = res.EmployeeId.Value.ToString(),
+                        DeskId = desk.Id.Value 
+                    }).ToList()
+                }).ToList()
+            };
 
             return loc;
+        }
+        internal static DeskModel MapToDeskModel(Desk desk)
+        {
+            var deskModel = new DeskModel
+            {
+                Id = desk.Id,
+                DeskLocationCode = desk.LocationCode,
+                LocationId = desk.LocationId,
+                Availability = AvailabilityEnum.Available == desk.Availability ? true : false,
+            };
+            return deskModel;
         }
     }
 }

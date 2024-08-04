@@ -26,9 +26,8 @@ namespace BookingSystem.Application.Commands.Handlers
             if (!await _readServiece.ExistsByIdAsync(request.LocationId))
                 throw new LocationDoesNotExistsException(request.LocationId);
 
-            Location loc = await _locationRepository.GetByIdAsync(request.LocationId);
 
-            await _locationRepository.RemoveAsync(loc);
+            await _locationRepository.RemoveAsync(request.LocationId);
             await _locationRepository.SaveChangesAsync(cancellationToken);
            
 

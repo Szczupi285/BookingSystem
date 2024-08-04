@@ -11,7 +11,8 @@ namespace BookingSystem.Infrastructure.EF.Models
     {
         public Guid Id { get; set; }   
         public string DeskLocationCode { get; set; }
-        public LocationModel Location { get; set; }   
+        public LocationModel Location { get; set; }
+        public Guid LocationId { get; set; }
         public bool Availability { get; set; }
         public ICollection<ReservationModel> Reservations { get; set; }
     }

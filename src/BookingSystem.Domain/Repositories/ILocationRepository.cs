@@ -13,7 +13,7 @@ namespace BookingSystem.Domain.Repositories
         Task<Location?> GetByIdAsync(LocationId Id);
         Task AddAsync(Location location);
         Task UpdateAsync(Location location);
-        Task RemoveAsync(Location location);
+        Task RemoveAsync(LocationId location);
         Task SaveChangesAsync(CancellationToken cancellation);
     }
 }
