@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -31,6 +32,13 @@ namespace BookingSystem.Api.Controllers
             await _mediator.Send(command);
             return Ok("Location added successfully");
         }
+        [HttpPost("RemoveLocation")]
+        public async Task<IActionResult> RemoveLocation([FromBody] RemoveLocation request)
+        {
+            var command = new RemoveLocation(request.LocationId);
+            await _mediator.Send(command);
+            return Ok("Location removed successfully");
+        }
         [HttpPost("AddDesk")]
         public async Task<IActionResult> AddDesk([FromBody] AddDesk request)
         {
@@ -38,6 +46,7 @@ namespace BookingSystem.Api.Controllers
             await _mediator.Send(command);
             return Ok("Desk added successfully");
         }
+       
 
     }
 }
