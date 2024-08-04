@@ -23,7 +23,7 @@ namespace BookingSystem.Domain.Entities
         public LocationId LocationId { get; private set; }
         public AvailabilityEnum Availability { get; private set; }
 
-        private ICollection<Reservation> _reservations;
+        private List<Reservation> _reservations;
 
         public Desk(DeskId id, DeskLocationCode locationCode, LocationId locationId)
         {
@@ -33,7 +33,16 @@ namespace BookingSystem.Domain.Entities
             Availability = AvailabilityEnum.Available;
             _reservations = new List<Reservation>();
         }
+        public Desk(DeskId id, DeskLocationCode locationCode, LocationId locationId, AvailabilityEnum availabilityEnum)
+        {
+            Id = id;
+            LocationCode = locationCode;
+            LocationId = locationId;
+            Availability = AvailabilityEnum.Available;
+            _reservations = new List<Reservation>();
+        }
 
+        public List<Reservation> GetReservations() => _reservations;
         internal void MakeUnavailiable()
         {
             Availability = AvailabilityEnum.Unavailable;

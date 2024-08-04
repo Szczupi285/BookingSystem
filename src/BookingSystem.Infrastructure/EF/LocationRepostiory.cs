@@ -10,12 +10,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace BookingSystem.Infrastructure.EF
 {
+    
     public class LocationRepostiory : ILocationRepository
     {
         private readonly AppDbContext _appDbContext;
-
 
         public async Task<Location?> GetByIdAsync(LocationId Id)
         {
