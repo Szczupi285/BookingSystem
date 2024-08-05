@@ -95,7 +95,7 @@ namespace BookingSystem.Infrastructure.EF
                     }
                     else if (dbDesk.DeskLocationCode != dsk.DeskLocationCode)
                     {
-                        _appDbContext.Entry(dsk).Property(d => d.Availability).IsModified = true;
+                        _appDbContext.Entry(dsk).Property(d => d.DeskLocationCode).IsModified = true;
                     }
                 }
 
