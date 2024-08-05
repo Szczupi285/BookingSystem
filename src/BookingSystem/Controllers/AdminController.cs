@@ -16,6 +16,8 @@ using System.Text;
 
 namespace BookingSystem.Api.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize(Roles = "Administrator")]
     [Route("api/[controller]")]
     [ApiController]
     public class AdminController : ControllerBase
