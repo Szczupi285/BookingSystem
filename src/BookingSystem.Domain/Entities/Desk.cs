@@ -38,7 +38,7 @@ namespace BookingSystem.Domain.Entities
             Id = id;
             LocationCode = locationCode;
             LocationId = locationId;
-            Availability = AvailabilityEnum.Available;
+            Availability = availabilityEnum;
             _reservations = new List<Reservation>();
         }
 

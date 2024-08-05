@@ -47,11 +47,18 @@ namespace BookingSystem.Api.Controllers
             return Ok("Desk added successfully");
         }
         [HttpPost("RemoveDesk")]
-        public async Task<IActionResult> RevmoeDesk([FromBody] RemoveDesk request)
+        public async Task<IActionResult> RemoveDesk([FromBody] RemoveDesk request)
         {
             var command = new RemoveDesk(request.LocationId, request.DeskId);
             await _mediator.Send(command);
             return Ok("Desk removed successfully");
+        }
+        [HttpPost("MakeDeskUnavailable")]
+        public async Task<IActionResult> MakeDeskUnavailable([FromBody] MakeDeskUnavailable request)
+        {
+            var command = new MakeDeskUnavailable(request.LocationId, request.DeskId);
+            await _mediator.Send(command);
+            return Ok("Desk made unavailable successfully");
         }
 
 

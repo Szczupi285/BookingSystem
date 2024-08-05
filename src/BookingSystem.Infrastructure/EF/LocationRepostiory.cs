@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection.Metadata;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -68,23 +69,43 @@ namespace BookingSystem.Infrastructure.EF
 
         public async Task UpdateAsync(Location location)
         {
-            var unchLoc = await _appDbContext.Locations
+            var dbModel = await _appDbContext.Locations
                 .AsNoTracking()
                 .Include(l => l.Desks)
                 .ThenInclude(d => d.Reservations)
                 .SingleOrDefaultAsync(l => l.Id == location.Id.Value);
 
+           
             var locationModel = LocationMapper.MapToLocationModel(location);
             _appDbContext.Attach(locationModel).State = EntityState.Modified;
+            // Checking if Desk from updated location model exists in DbModel. 
+            // If not we attach desk and mark it state as Added.
             foreach(var dsk in locationModel.Desks) 
             { 
-                if(!unchLoc.Desks.Any(d => d.Id == dsk.Id))
+                // Add Availability if in exists in locationModel and doesn't in dbModel
+                if(!dbModel.Desks.Any(d => d.Id == dsk.Id))
                     _appDbContext.Attach(dsk).State = EntityState.Added;
-               
+                else
+                {
+                    // Update Availability if it has changed
+                    var dbDesk = dbModel.Desks.First(d => d.Id == dsk.Id);
+                    if (dbDesk.Availability != dsk.Availability)
+                    {
+                        _appDbContext.Entry(dsk).Property(d => d.Availability).IsModified = true;
+                    }
+                    else if (dbDesk.DeskLocationCode != dsk.DeskLocationCode)
+                    {
+                        _appDbContext.Entry(dsk).Property(d => d.Availability).IsModified = true;
+                    }
+                }
+
             }
-            var desksToDel = unchLoc.Desks.Where(d => !locationModel.Desks.Any(ld => ld.Id == d.Id)).ToList();
+            // Retriving desks that exist in DbModel but does not exist in updated location model.
+            // which means they've been deleted in memory.
+            var desksToDel = dbModel.Desks.Where(d => !locationModel.Desks.Any(ld => ld.Id == d.Id)).ToList();
             foreach (var dsk in desksToDel)
             {
+                // Setting state of desks that have been deleted in memory to Deleted and removing them.
                 _appDbContext.Entry(dsk).State = EntityState.Deleted;
                 locationModel.Desks.Remove(dsk);
             }

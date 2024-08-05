@@ -61,7 +61,7 @@ namespace BookingSystem.Infrastructure.Mappers
                 {
                     Id = desk.Id.Value,
                     DeskLocationCode = desk.LocationCode,
-                    Availability = desk.Availability == AvailabilityEnum.Available,
+                    Availability = desk.Availability == AvailabilityEnum.Available ? true : false,
                     LocationId = location.Id, 
                     Reservations = desk.GetReservations().Select(res => new ReservationModel
                     {
