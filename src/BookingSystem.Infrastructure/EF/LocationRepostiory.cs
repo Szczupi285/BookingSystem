@@ -1,4 +1,5 @@
-﻿using BookingSystem.Domain.Consts;
+﻿using BookingSystem.Application.Commands;
+using BookingSystem.Domain.Consts;
 using BookingSystem.Domain.DomainEvent;
 using BookingSystem.Domain.Entities;
 using BookingSystem.Domain.Repositories;
@@ -81,14 +82,14 @@ namespace BookingSystem.Infrastructure.EF
             // Checking if Desk from updated location model exists in DbModel. 
             // If not we attach desk and mark it state as Added.
             foreach(var dsk in locationModel.Desks) 
-            { 
+            {
+                var dbDesk = dbModel.Desks.First(d => d.Id == dsk.Id);
                 // Add Availability if in exists in locationModel and doesn't in dbModel
-                if(!dbModel.Desks.Any(d => d.Id == dsk.Id))
+                if (!dbModel.Desks.Any(d => d.Id == dsk.Id))
                     _appDbContext.Attach(dsk).State = EntityState.Added;
                 else
                 {
                     // Update Availability if it has changed
-                    var dbDesk = dbModel.Desks.First(d => d.Id == dsk.Id);
                     if (dbDesk.Availability != dsk.Availability)
                     {
                         _appDbContext.Entry(dsk).Property(d => d.Availability).IsModified = true;
@@ -96,6 +97,13 @@ namespace BookingSystem.Infrastructure.EF
                     else if (dbDesk.DeskLocationCode != dsk.DeskLocationCode)
                     {
                         _appDbContext.Entry(dsk).Property(d => d.DeskLocationCode).IsModified = true;
+                    }
+                }
+                foreach(var reservation in dsk.Reservations)
+                {
+                    if(!dbDesk.Reservations.Any(r => r.Id == reservation.Id))
+                    {
+                        _appDbContext.Attach(reservation).State = EntityState.Added;
                     }
                 }
 
