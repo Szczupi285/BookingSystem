@@ -19,7 +19,7 @@ namespace BookingSystem.Domain.ValueObjects.Reservation
             _dateTimeProvider = dateTimeProvider;
             if (startDate > endDate)
                 throw new ReservationCannotEndBeforeItStartsException(startDate, endDate);
-            else if (startDate < _dateTimeProvider.UtcNow())
+            else if (startDate < _dateTimeProvider.Now())
                 throw new ReservationDateCannotBeInThePastException();
             else if ((endDate - startDate).Days >= 7)
                 throw new ExceededMaximumReservationPeriodException();

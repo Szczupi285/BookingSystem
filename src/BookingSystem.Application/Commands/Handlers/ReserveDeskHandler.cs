@@ -35,11 +35,14 @@ namespace BookingSystem.Application.Commands.Handlers
             Location loc = await _locationRepository.GetByIdAsync(request.LocationId);
             Desk desk = loc.GetDeskById(request.DeskId);
 
-            ReservationPeriod resPe = new(request.startDate, request.endDate, _dateTimeProvider);
+            var startDate = new DateTime(request.startDate.Year, request.startDate.Month, request.startDate.Day, 0,0,0);
+
+            ReservationPeriod resPe = new(startDate, startDate.AddDays(request.numOfDays), _dateTimeProvider);
             Reservation res = new Reservation(Guid.NewGuid(), resPe, request.DeskId, request.EmployeeId);
+
             desk.AddReservation(res);
 
-            //await _locationRepository.UpdateAsync(loc);
+            await _locationRepository.UpdateAsync(loc);
             await _locationRepository.SaveChangesAsync(cancellationToken);
         }
     }

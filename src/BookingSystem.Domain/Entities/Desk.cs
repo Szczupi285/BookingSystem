@@ -77,10 +77,9 @@ namespace BookingSystem.Domain.Entities
         public void AddReservation(Reservation reservation)
         {
             if (CanReserve(reservation.Period))
-            {
                 _reservations.Add(reservation);
-            }
-            throw new DeskNotAvailableForReservationException();
+            else
+                throw new DeskNotAvailableForReservationException();
         }
       
         internal Reservation GetReservationById(ReservationId Id)
