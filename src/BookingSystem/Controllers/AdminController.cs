@@ -60,6 +60,13 @@ namespace BookingSystem.Api.Controllers
             await _mediator.Send(command);
             return Ok("Desk made unavailable successfully");
         }
+        [HttpPost("MakeDeskAvailable")]
+        public async Task<IActionResult> MakeDeskAvailable([FromBody] MakeDeskAvailable request)
+        {
+            var command = new MakeDeskAvailable(request.LocationId, request.DeskId);
+            await _mediator.Send(command);
+            return Ok("Desk made available successfully");
+        }
 
 
     }
