@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Infrastructure.Queries.Handlers
 {
-    internal sealed class GetUnavailiableDesksHandler
+    internal sealed class GetUnavailiableDesksHandler : IRequestHandler<GetUnavailiableDesks, IEnumerable<UnavailableDeskDTO>>
     {
         private readonly AppDbContext _dbContext;
         public GetUnavailiableDesksHandler(AppDbContext context)

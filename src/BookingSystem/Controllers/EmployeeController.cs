@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using System.Security.Claims;
 
 namespace BookingSystem.Api.Controllers
@@ -58,16 +59,37 @@ namespace BookingSystem.Api.Controllers
             return Ok(locations);
         }
         [HttpGet("GetDesksInLocationForEmployeeHandler")]
-        public async Task<ActionResult<IEnumerable<DeskReservationDTO>>> GetDeskInLocationForEmployee([FromQuery] Guid locationId, Guid deskId)
+        public async Task<ActionResult<IEnumerable<DeskReservationDTO>>> GetDeskInLocationForEmployee([FromQuery] Guid locationId, [FromQuery] Guid deskId)
         {
             var query = new GetDeskInLocationForEmployee(locationId, deskId);
             var locations = await _mediator.Send(query);
             return Ok(locations);
         }
+        // cjecl
         [HttpGet("GetAvailableDesks")]
-        public async Task<ActionResult<IEnumerable<DeskReservationDTO>>> GetDeskInLocationForEmployee([FromQuery] Guid locationId, Guid deskId)
+        public async Task<ActionResult<IEnumerable<AvailableDeskDTO>>> GetAvailableDesks(
+            [FromQuery] Guid locationId, [FromQuery] DateTime startDate, [FromQuery] DateTime endDate,
+            [FromQuery] int pageNumber, [FromQuery] int pageSize)
         {
-            var query = new GetDeskInLocationForEmployee(locationId, deskId);
+            var query = new GetAvailiableDesks(locationId, startDate, endDate, pageNumber, pageSize);
+            var locations = await _mediator.Send(query);
+            return Ok(locations);
+        }
+        [HttpGet("GetUnvailableDesks")]
+        public async Task<ActionResult<IEnumerable<UnavailableDeskDTO>>> GetUnavailableDesks(
+            [FromQuery] Guid locationId, [FromQuery] DateTime startDate, [FromQuery] DateTime endDate,
+            [FromQuery] int pageNumber, [FromQuery] int pageSize)
+        {
+            var query = new GetUnavailiableDesks(locationId, startDate, endDate, pageNumber, pageSize);
+            var locations = await _mediator.Send(query);
+            return Ok(locations);
+        }
+        [HttpGet("GetDesksInLocationByCity")]
+        public async Task<ActionResult<IEnumerable<DeskDTO>>> GetDesksInLocationByCity(
+            [FromQuery] string city, [FromQuery] int pageNumber,
+             [FromQuery] int pageSize)
+        {
+            var query = new GetDesksByCity(city, pageNumber, pageSize);
             var locations = await _mediator.Send(query);
             return Ok(locations);
         }

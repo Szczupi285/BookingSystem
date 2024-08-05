@@ -86,7 +86,7 @@ namespace BookingSystem.Api.Controllers
             return Ok(locations);
         }
         [HttpGet("GetDesksInLocationForAdminHandler")]
-        public async Task<ActionResult<IEnumerable<DetailedDeskDTO>>> GetDeskInLocationForAdmin([FromQuery] Guid locationId, Guid deskId)
+        public async Task<ActionResult<IEnumerable<DetailedDeskDTO>>> GetDeskInLocationForAdmin([FromQuery] Guid locationId, [FromQuery] Guid deskId)
         {
             var query = new GetDeskInLocationForAdmin(locationId, deskId);
             var locations = await _mediator.Send(query);
