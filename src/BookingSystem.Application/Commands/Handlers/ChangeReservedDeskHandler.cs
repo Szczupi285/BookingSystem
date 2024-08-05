@@ -28,11 +28,9 @@ namespace BookingSystem.Application.Commands.Handlers
                 throw new LocationDoesNotExistsException(request.LocationId);
 
             Location loc = await _locationRepository.GetByIdAsync(request.LocationId);
-            loc.ChangeDesk(request.LocationId,request.oldDeskId, request.NewDeskId, request.ReservationId, request.EmployeeId);
+            loc.ChangeDesk(request.oldDeskId, request.NewDeskId, request.ReservationId, request.EmployeeId);
 
-            _locationRepository.UpdateAsync(loc);
-            await _locationRepository.SaveChangesAsync(cancellationToken);
-           
+            await _locationRepository.UpdateAsync(loc);
         }
     }
 }

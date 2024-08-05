@@ -45,7 +45,7 @@ namespace BookingSystem.Infrastructure.Mappers
                 foreach (var res in DeskModel.Reservations)
                 {
                     var reserv = new Reservation(res.Id, new ReservationPeriod(res.StartDate, res.EndDate, new DateTimeProvider()), DeskModel.Id, Guid.Parse(res.User.Id));
-                    desk.AddReservation(reserv);
+                    desk._reservations.Add(reserv);
                 }
             }
             return loc;

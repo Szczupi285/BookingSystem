@@ -1,4 +1,6 @@
 ﻿using BookingSystem.Application.Commands;
+using BookingSystem.Application.DTO;
+using BookingSystem.Application.Queries;
 using BookingSystem.Infrastructure.EF.DTO;
 using BookingSystem.Infrastructure.Services;
 using MediatR;
@@ -68,6 +70,27 @@ namespace BookingSystem.Api.Controllers
             var command = new MakeDeskAvailable(request.LocationId, request.DeskId);
             await _mediator.Send(command);
             return Ok("Desk made available successfully");
+        }
+        [HttpGet("GetAllLocations")]
+        public async Task<ActionResult<IEnumerable<LocationDTO>>> GetAllLocations([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        {
+            var query = new GetAllLocations(pageNumber, pageSize);
+            var locations = await _mediator.Send(query);
+            return Ok(locations);
+        }
+        [HttpGet("GetDesksInLocation")]
+        public async Task<ActionResult<IEnumerable<DeskDTO>>> GetDesksInLocation([FromQuery] Guid locationId, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        {
+            var query = new GetDesksInLocation(locationId, pageNumber, pageSize);
+            var locations = await _mediator.Send(query);
+            return Ok(locations);
+        }
+        [HttpGet("GetDesksInLocationForAdminHandler")]
+        public async Task<ActionResult<IEnumerable<DetailedDeskDTO>>> GetDeskInLocationForAdmin([FromQuery] Guid locationId, Guid deskId)
+        {
+            var query = new GetDeskInLocationForAdmin(locationId, deskId);
+            var locations = await _mediator.Send(query);
+            return Ok(locations);
         }
 
 

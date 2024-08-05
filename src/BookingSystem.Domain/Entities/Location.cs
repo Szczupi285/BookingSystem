@@ -77,7 +77,7 @@ namespace BookingSystem.Domain.Entities
 
             AddEvent(new DeskMadeAvailable(desk));
         }
-        public void ChangeDesk(LocationId locationId,DeskId oldDeskId, DeskId deskId, ReservationId reservationId, Guid employeeId)
+        public void ChangeDesk(DeskId oldDeskId, DeskId deskId, ReservationId reservationId, Guid employeeId)
         {
 
             var desk = GetDeskById(deskId);

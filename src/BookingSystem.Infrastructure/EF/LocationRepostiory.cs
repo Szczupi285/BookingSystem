@@ -84,11 +84,12 @@ namespace BookingSystem.Infrastructure.EF
             // If not we attach desk and mark it state as Added.
             foreach(var dsk in locationModel.Desks) 
             {
-                var dbDesk = dbModel.Desks.First(d => d.Id == dsk.Id);
-                // Add Availability if in exists in locationModel and doesn't in dbModel
+                var dbDesk = dbModel.Desks.FirstOrDefault(d => d.Id == dsk.Id);
+                // Add Desk if in exists in locationModel and doesn't in dbModel
                 if (!dbModel.Desks.Any(d => d.Id == dsk.Id))
                     _appDbContext.Attach(dsk).State = EntityState.Added;
-                else
+                // Try to update properties only if DbDest is not null
+                if(dbDesk != null) 
                 {
                     // Update Availability if it has changed
                     if (dbDesk.Availability != dsk.Availability)
@@ -99,16 +100,28 @@ namespace BookingSystem.Infrastructure.EF
                     {
                         _appDbContext.Entry(dsk).Property(d => d.DeskLocationCode).IsModified = true;
                     }
-                }
-                foreach(var reservation in dsk.Reservations)
-                {
-                    if(!dbDesk.Reservations.Any(r => r.Id == reservation.Id))
+
+                    foreach (var reservation in dsk.Reservations)
                     {
-                        _appDbContext.Attach(reservation).State = EntityState.Added;
+                        // add reservation if res doesn't exist in dbDesk
+                        if (!dbDesk.Reservations.Any(r => r.Id == reservation.Id))
+                        {
+                            _appDbContext.Attach(reservation).State = EntityState.Added;
+                        }
+                    }
+
+                    // delete reservations if they don't exist in locationModel.Desks
+                    var reservationsToDel = dbDesk.Reservations
+                    .Where(r => !dsk.Reservations.Any(ld => ld.Id == r.Id)).ToList();
+                    foreach (var reservation in reservationsToDel)
+                    {
+                        _appDbContext.Entry(reservation).State = EntityState.Deleted;
+                        dbDesk.Reservations.Remove(reservation);
                     }
                 }
-
             }
+
+
             // Retriving desks that exist in DbModel but does not exist in updated location model.
             // which means they've been deleted in memory.
             var desksToDel = dbModel.Desks.Where(d => !locationModel.Desks.Any(ld => ld.Id == d.Id)).ToList();

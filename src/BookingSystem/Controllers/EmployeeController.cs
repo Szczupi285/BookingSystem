@@ -1,5 +1,6 @@
 ﻿using BookingSystem.Application.Commands;
 using BookingSystem.Application.DTO;
+using BookingSystem.Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -42,5 +43,34 @@ namespace BookingSystem.Api.Controllers
             await _mediator.Send(command);
             return Ok("Desk reserved succesfully");
         }
+        [HttpGet("GetAllLocations")]
+        public async Task<ActionResult<IEnumerable<LocationDTO>>> GetAllLocations([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        {
+            var query = new GetAllLocations(pageNumber, pageSize);
+            var locations = await _mediator.Send(query);
+            return Ok(locations);
+        }
+        [HttpGet("GetDesksInLocation")]
+        public async Task<ActionResult<IEnumerable<DeskDTO>>> GetDesksInLocation([FromQuery] Guid locationId, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        {
+            var query = new GetDesksInLocation(locationId, pageNumber, pageSize);
+            var locations = await _mediator.Send(query);
+            return Ok(locations);
+        }
+        [HttpGet("GetDesksInLocationForEmployeeHandler")]
+        public async Task<ActionResult<IEnumerable<DeskReservationDTO>>> GetDeskInLocationForEmployee([FromQuery] Guid locationId, Guid deskId)
+        {
+            var query = new GetDeskInLocationForEmployee(locationId, deskId);
+            var locations = await _mediator.Send(query);
+            return Ok(locations);
+        }
+        [HttpGet("GetAvailableDesks")]
+        public async Task<ActionResult<IEnumerable<DeskReservationDTO>>> GetDeskInLocationForEmployee([FromQuery] Guid locationId, Guid deskId)
+        {
+            var query = new GetDeskInLocationForEmployee(locationId, deskId);
+            var locations = await _mediator.Send(query);
+            return Ok(locations);
+        }
+
     }
 }
