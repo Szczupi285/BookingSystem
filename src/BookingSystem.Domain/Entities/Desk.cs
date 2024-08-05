@@ -22,8 +22,7 @@ namespace BookingSystem.Domain.Entities
         public DeskLocationCode LocationCode { get; private set; }
         public LocationId LocationId { get; private set; }
         public AvailabilityEnum Availability { get; private set; }
-
-        private List<Reservation> _reservations;
+        public List<Reservation> _reservations { get; set; } = new List<Reservation>();
 
         public Desk(DeskId id, DeskLocationCode locationCode, LocationId locationId)
         {
@@ -31,7 +30,6 @@ namespace BookingSystem.Domain.Entities
             LocationCode = locationCode;
             LocationId = locationId;
             Availability = AvailabilityEnum.Available;
-            _reservations = new List<Reservation>();
         }
         public Desk(DeskId id, DeskLocationCode locationCode, LocationId locationId, AvailabilityEnum availabilityEnum)
         {
@@ -39,7 +37,6 @@ namespace BookingSystem.Domain.Entities
             LocationCode = locationCode;
             LocationId = locationId;
             Availability = availabilityEnum;
-            _reservations = new List<Reservation>();
         }
 
         public List<Reservation> GetReservations() => _reservations;
@@ -83,9 +80,7 @@ namespace BookingSystem.Domain.Entities
         }
       
         internal Reservation GetReservationById(ReservationId Id)
-        {
-            var res = _reservations.FirstOrDefault(reservation => reservation.Id == Id) ?? throw new ReservationNotFoundException(Id);
-            return res;
-        }
+            => _reservations.FirstOrDefault(reservation => reservation.Id == Id) ?? throw new ReservationNotFoundException(Id);
+
     }
 }

@@ -38,6 +38,7 @@ namespace BookingSystem.Infrastructure.EF
                 .AsNoTracking()
                 .Include(l => l.Desks)
                 .ThenInclude(d => d.Reservations)
+                .ThenInclude(u => u.User)
                 .SingleOrDefaultAsync(l => l.Id == Id.Value);
             
             

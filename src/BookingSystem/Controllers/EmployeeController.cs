@@ -32,5 +32,15 @@ namespace BookingSystem.Api.Controllers
             return Ok("Desk reserved succesfully");
         }
 
+        [HttpPost("ChangeReservedDesk")]
+        public async Task<IActionResult> ChangeReserveDesk([FromBody] ChangeReservedDeskRequestDTO request)
+        {
+            var claims = User.Claims.ToDictionary(c => c.Type, c => c.Value);
+            var userId = claims.GetValueOrDefault(ClaimTypes.NameIdentifier);
+
+            var command = new ChangeReservedDesk(request.LocationId,request.OldDeskId, request.NewDeskId, Guid.Parse(userId), request.ReservationId);
+            await _mediator.Send(command);
+            return Ok("Desk reserved succesfully");
+        }
     }
 }

@@ -77,13 +77,18 @@ namespace BookingSystem.Domain.Entities
 
             AddEvent(new DeskMadeAvailable(desk));
         }
-        public void ChangeDesk(DeskId deskId, ReservationId reservationId)
+        public void ChangeDesk(LocationId locationId,DeskId oldDeskId, DeskId deskId, ReservationId reservationId, Guid employeeId)
         {
-            var desk = GetDeskById(deskId);
-            var oldDeskId = desk.Id;
 
-            var res = desk.GetReservationById(reservationId);
+            var desk = GetDeskById(deskId);
+            var oldDesk = GetDeskById(oldDeskId);
+            var res = oldDesk.GetReservationById(reservationId);
+
+            if (res.EmployeeId.Value != employeeId)
+                throw new ReservationNotOwnedByUserException(employeeId);
+            desk.AddReservation(res);
             res.ChangeReservation(deskId);
+            oldDesk._reservations.Remove(res);
 
             AddEvent(new ReservationChanged(reservationId, oldDeskId, deskId));
         }

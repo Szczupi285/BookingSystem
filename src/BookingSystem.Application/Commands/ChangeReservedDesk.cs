@@ -8,5 +8,5 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Application.Commands
 {
-    public record ChangeReservedDesk(Guid LocationId, Guid NewDeskId, Guid ReservationId) : IRequest;
+    public record ChangeReservedDesk(Guid LocationId,Guid oldDeskId, Guid NewDeskId, Guid EmployeeId, Guid ReservationId) : IRequest;
 }
