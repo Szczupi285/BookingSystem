@@ -67,19 +67,19 @@ namespace BookingSystem.Api.Controllers
         }
         [HttpGet("GetAvailableDesks")]
         public async Task<ActionResult<IEnumerable<AvailableDeskDTO>>> GetAvailableDesks(
-            [FromQuery] Guid locationId, [FromQuery] DateTime startDate, [FromQuery] DateTime endDate,
+            [FromQuery] Guid locationId, [FromQuery] DateTime startDate, [FromQuery] int numberOfDays,
             [FromQuery] int pageNumber, [FromQuery] int pageSize)
         {
-            var query = new GetAvailiableDesks(locationId, startDate, endDate, pageNumber, pageSize);
+            var query = new GetAvailiableDesks(locationId, startDate, numberOfDays, pageNumber, pageSize);
             var locations = await _mediator.Send(query);
             return Ok(locations);
         }
         [HttpGet("GetUnvailableDesks")]
         public async Task<ActionResult<IEnumerable<UnavailableDeskDTO>>> GetUnavailableDesks(
-            [FromQuery] Guid locationId, [FromQuery] DateTime startDate, [FromQuery] DateTime endDate,
+            [FromQuery] Guid locationId, [FromQuery] DateTime startDate, [FromQuery] int numberOfDays,
             [FromQuery] int pageNumber, [FromQuery] int pageSize)
         {
-            var query = new GetUnavailiableDesks(locationId, startDate, endDate, pageNumber, pageSize);
+            var query = new GetUnavailiableDesks(locationId, startDate, numberOfDays, pageNumber, pageSize);
             var locations = await _mediator.Send(query);
             return Ok(locations);
         }

@@ -22,7 +22,7 @@ namespace BookingSystem.Infrastructure.Queries.Handlers
                 .Where(d => d.Location.Id == request.LocationId && 
                    d.Availability == false ||
                    d.Reservations.Any(r => d.Reservations.Any(r =>
-                    request.StartDate <= r.EndDate && r.StartDate < request.EndDate)))
+                    request.StartDate <= r.EndDate && r.StartDate < request.StartDate.AddDays(request.numOfDays))))
                 .Skip((request.PageNumber - 1) * request.PageSize)
                 .Take(request.PageSize)
                 .Select(d => new UnavailableDeskDTO

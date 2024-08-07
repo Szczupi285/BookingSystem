@@ -28,7 +28,7 @@ namespace BookingSystem.Infrastructure.Queries.Handlers
                 .Where(d => d.Location.Id == request.LocationId &&
                     d.Availability == true &&
                 !d.Reservations.Any(r =>
-                    request.StartDate <= r.EndDate && r.StartDate < request.EndDate))
+                    request.StartDate <= r.EndDate && r.StartDate < request.StartDate.AddDays(request.numOfDays)))
                 .Take(request.PageSize)
                 .Select(d => new AvailableDeskDTO
                 (
