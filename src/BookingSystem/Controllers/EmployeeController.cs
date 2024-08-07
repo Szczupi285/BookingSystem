@@ -58,7 +58,7 @@ namespace BookingSystem.Api.Controllers
             var locations = await _mediator.Send(query);
             return Ok(locations);
         }
-        [HttpGet("GetDesksInLocationForEmployeeHandler")]
+        [HttpGet("GetDeskInLocationForEmployee")]
         public async Task<ActionResult<IEnumerable<DeskReservationDTO>>> GetDeskInLocationForEmployee([FromQuery] Guid locationId, [FromQuery] Guid deskId)
         {
             var query = new GetDeskInLocationForEmployee(locationId, deskId);

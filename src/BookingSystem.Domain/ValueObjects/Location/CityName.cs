@@ -11,7 +11,8 @@ namespace BookingSystem.Domain.ValueObjects.Location
 {
     public sealed record CityName : AbstractPlaceName
     {
-        public CityName(string value) : base(value, new CityNameCannotBeNullOrEmptyException(), new CityNameCannotContainNumbersException(value))
+        public CityName(string value) : base(value, 3, 80, new CityNameCannotBeNullOrEmptyException(), 
+            new InvalidCityNameLengthException(value, 3, 80) , new CityNameCannotContainNumbersException(value))
         {
         }
 
