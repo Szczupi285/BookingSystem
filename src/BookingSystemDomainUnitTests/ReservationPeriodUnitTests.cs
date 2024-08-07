@@ -29,28 +29,28 @@ namespace BookingSystemDomainUnitTests
         {
             var date = new DateTime(2024, 1, 1);
             _dateTimeProviderMock.Setup(p => p.UtcNow()).Returns(date);
-            var reservationPeriod = new ReservationPeriod(new DateTime(2024, 2, 1), new DateTime(2024, 2, endDay), _dateTimeProviderMock.Object);
+            var reservationPeriod = new ReservationPeriod(new DateTime(2024, 2, 1), new DateTime(2024, 2, endDay), _dateTimeProviderMock.Object, false);
         }
         [Fact]
         public void InvalidReservationPeriod_ShouldThrowReservationCannotEndBeforeItStartsException()
         {
             var date = new DateTime(2024, 1, 1);
             _dateTimeProviderMock.Setup(p => p.UtcNow()).Returns(date);
-            Assert.Throws<ReservationCannotEndBeforeItStartsException>(() => new ReservationPeriod(new DateTime(2024, 2, 2), new DateTime(2024, 2, 1), _dateTimeProviderMock.Object));
+            Assert.Throws<ReservationCannotEndBeforeItStartsException>(() => new ReservationPeriod(new DateTime(2024, 2, 2), new DateTime(2024, 2, 1), _dateTimeProviderMock.Object, false));
         }
         [Fact]
         public void InvalidReservationPeriod_ShouldThrowExceededMaximumReservationPeriodException()
         {
             var date = new DateTime(2024, 1, 1);
             _dateTimeProviderMock.Setup(p => p.Now()).Returns(date);
-            Assert.Throws<ExceededMaximumReservationPeriodException>(() => new ReservationPeriod(new DateTime(2024, 2, 1), new DateTime(2024, 2, 8,0, 0, 1), _dateTimeProviderMock.Object));
+            Assert.Throws<ExceededMaximumReservationPeriodException>(() => new ReservationPeriod(new DateTime(2024, 2, 1), new DateTime(2024, 2, 8,0, 0, 1), _dateTimeProviderMock.Object, false));
         }
         [Fact]
         public void InvalidReservationPeriod_ShouldThrowReservationDateCannotBeInThePastException()
         {
             var date = new DateTime(2024, 1, 1);
             _dateTimeProviderMock.Setup(p => p.Now()).Returns(date);
-            Assert.Throws<ReservationDateCannotBeInThePastException>(() => new ReservationPeriod(new DateTime(2023, 12, 31), new DateTime(2024, 1, 1), _dateTimeProviderMock.Object));
+            Assert.Throws<ReservationDateCannotBeInThePastException>(() => new ReservationPeriod(new DateTime(2023, 12, 31), new DateTime(2024, 1, 1), _dateTimeProviderMock.Object, false));
         }
     }
 }

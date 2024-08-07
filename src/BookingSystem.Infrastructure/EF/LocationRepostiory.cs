@@ -133,7 +133,6 @@ namespace BookingSystem.Infrastructure.EF
             }
 
             _appDbContext.Locations.Update(locationModel);
-            await _appDbContext.SaveChangesAsync();
         }
 
     }

@@ -14,12 +14,12 @@ namespace BookingSystem.Domain.ValueObjects.Reservation
         public DateTime StartDate { get; }
         public DateTime EndDate { get; }
 
-        public ReservationPeriod(DateTime startDate, DateTime endDate,  IDateTimeProvider dateTimeProvider)
+        public ReservationPeriod(DateTime startDate, DateTime endDate,  IDateTimeProvider dateTimeProvider, bool isHistoricalData)
         {
             _dateTimeProvider = dateTimeProvider;
             if (startDate > endDate)
                 throw new ReservationCannotEndBeforeItStartsException(startDate, endDate);
-            else if (startDate < _dateTimeProvider.Now())
+            else if (!isHistoricalData && startDate < _dateTimeProvider.Now())
                 throw new ReservationDateCannotBeInThePastException();
             else if ((endDate - startDate).TotalSeconds > 604800)
                 throw new ExceededMaximumReservationPeriodException();

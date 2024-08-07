@@ -31,6 +31,7 @@ namespace BookingSystem.Application.Commands.Handlers
             loc.ChangeDesk(request.oldDeskId, request.NewDeskId, request.ReservationId, request.EmployeeId);
 
             await _locationRepository.UpdateAsync(loc);
+            await _locationRepository.SaveChangesAsync(cancellationToken);
         }
     }
 }
