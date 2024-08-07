@@ -25,14 +25,15 @@ namespace BookingSystem.Application.Commands.Handlers
         {
             if (!await _readServiece.ExistsByIdAsync(request.LocationId))
                 throw new LocationDoesNotExistsException(request.LocationId);
-
-
-            await _locationRepository.RemoveAsync(request.LocationId);
-            await _locationRepository.SaveChangesAsync(cancellationToken);
-           
-
-
-
+            
+            var loc = await _locationRepository.GetByIdAsync(request.LocationId);
+            if (loc.Desks.Count == 0)
+            {
+                await _locationRepository.RemoveAsync(request.LocationId);
+                await _locationRepository.SaveChangesAsync(cancellationToken);
+            }
+            else
+                throw new CantRemoveLocationWhileDesksExist();
         }
     }
 }

@@ -5,11 +5,13 @@ using BookingSystem.Infrastructure.EF;
 using BookingSystem.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using BookingSystem.Application.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.Text;
+using BookingSystem.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -81,6 +83,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
+builder.Services.AddServicesCollection();
+
 
 builder.Services.AddScoped<IAuthenticationService, UserAuthenticationService>();
 builder.Services.AddScoped<ITokenService, JwtTokenService>();
@@ -96,6 +100,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseServicesCollection();
 
 app.UseHttpsRedirection();
 

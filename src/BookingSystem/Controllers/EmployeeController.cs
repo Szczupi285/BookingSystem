@@ -31,10 +31,10 @@ namespace BookingSystem.Api.Controllers
 
             var command = new ReserveDesk(request.LocationId, request.DeskId, Guid.Parse(userId), request.startDate, request.numOfDays);
             await _mediator.Send(command);
-            return Ok("Desk reserved succesfully");
+            return Created();
         }
 
-        [HttpPost("ChangeReservedDesk")]
+        [HttpPut("ChangeReservedDesk")]
         public async Task<IActionResult> ChangeReserveDesk([FromBody] ChangeReservedDeskRequestDTO request)
         {
             var claims = User.Claims.ToDictionary(c => c.Type, c => c.Value);
@@ -42,7 +42,7 @@ namespace BookingSystem.Api.Controllers
 
             var command = new ChangeReservedDesk(request.LocationId,request.OldDeskId, request.NewDeskId, Guid.Parse(userId), request.ReservationId);
             await _mediator.Send(command);
-            return Ok("Desk reserved succesfully");
+            return Ok("Reservation desk changed");
         }
         [HttpGet("GetAllLocations")]
         public async Task<ActionResult<IEnumerable<LocationDTO>>> GetAllLocations([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
