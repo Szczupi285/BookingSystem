@@ -21,7 +21,7 @@ namespace BookingSystem.Domain.ValueObjects.Reservation
                 throw new ReservationCannotEndBeforeItStartsException(startDate, endDate);
             else if (startDate < _dateTimeProvider.Now())
                 throw new ReservationDateCannotBeInThePastException();
-            else if ((endDate - startDate).Days > 7)
+            else if ((endDate - startDate).TotalSeconds > 604800)
                 throw new ExceededMaximumReservationPeriodException();
 
 

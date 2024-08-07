@@ -65,7 +65,6 @@ namespace BookingSystem.Api.Controllers
             var locations = await _mediator.Send(query);
             return Ok(locations);
         }
-        // cjecl
         [HttpGet("GetAvailableDesks")]
         public async Task<ActionResult<IEnumerable<AvailableDeskDTO>>> GetAvailableDesks(
             [FromQuery] Guid locationId, [FromQuery] DateTime startDate, [FromQuery] DateTime endDate,
