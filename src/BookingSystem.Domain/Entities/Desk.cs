@@ -60,11 +60,18 @@ namespace BookingSystem.Domain.Entities
             }
             return true;    
         }
+        
         public bool HaveFutureReservations()
         {
             foreach(Reservation reservation in _reservations)
-                if(reservation.Period.StartDate > DateTime.UtcNow)
+            {
+                if (reservation.Period.StartDate < DateTime.Now &&
+                    reservation.Period.EndDate < DateTime.Now)
+                    continue;
+                else
                     return true;
+            }
+            
 
             return false;
         }
