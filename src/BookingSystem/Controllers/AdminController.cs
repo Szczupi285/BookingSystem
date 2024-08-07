@@ -37,7 +37,7 @@ namespace BookingSystem.Api.Controllers
             await _mediator.Send(command);
             return Created();
         }
-        [HttpPost("RemoveLocation")]
+        [HttpDelete("RemoveLocation")]
         public async Task<IActionResult> RemoveLocation([FromBody] RemoveLocation request)
         {
             var command = new RemoveLocation(request.LocationId);
@@ -51,7 +51,7 @@ namespace BookingSystem.Api.Controllers
             await _mediator.Send(command);
             return Created();
         }
-        [HttpPost("RemoveDesk")]
+        [HttpDelete("RemoveDesk")]
         public async Task<IActionResult> RemoveDesk([FromBody] RemoveDesk request)
         {
             var command = new RemoveDesk(request.LocationId, request.DeskId);
