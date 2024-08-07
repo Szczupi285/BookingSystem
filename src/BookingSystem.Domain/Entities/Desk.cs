@@ -69,7 +69,7 @@ namespace BookingSystem.Domain.Entities
             return false;
         }
         private bool DoesOverlap(ReservationPeriod resPeriod1, ReservationPeriod resPeriod2)
-            => resPeriod1.StartDate <= resPeriod2.EndDate && resPeriod2.StartDate <= resPeriod1.EndDate;
+            => resPeriod1.StartDate < resPeriod2.EndDate && resPeriod2.StartDate < resPeriod1.EndDate;
 
         public void AddReservation(Reservation reservation)
         {

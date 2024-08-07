@@ -37,7 +37,7 @@ namespace BookingSystem.Application.Commands.Handlers
 
             var startDate = new DateTime(request.startDate.Year, request.startDate.Month, request.startDate.Day, 0,0,0);
 
-            ReservationPeriod resPe = new(startDate, startDate.AddDays(request.numOfDays), _dateTimeProvider);
+            ReservationPeriod resPe = new(startDate, startDate.AddDays(request.numOfDays).AddSeconds(-1), _dateTimeProvider);
             Reservation res = new Reservation(Guid.NewGuid(), resPe, request.DeskId, request.EmployeeId);
 
             desk.AddReservation(res);
